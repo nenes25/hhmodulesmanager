@@ -1,0 +1,31 @@
+{
+  "name": "hhennes/modulesmanager",
+  "description": "Manage modules from cli in Continuous deployment",
+  "license": "AFL",
+  "authors": [
+    {
+      "name": "Hervé Hennes",
+      "email": "contact@h-hennes.fr"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Hhennes\\ModulesManager\\": "src/"
+    }
+  },
+  "require": {
+    "prestashop/php-dev-tools": "^4.3"
+  },
+  "config": {
+    "prepend-autoloader": false
+  },
+  "scripts": {
+    "header-stamp": [
+      "vendor/bin/header-stamp --extensions=php,js,css,tpl --exclude=.github,vendor,tests,translations --license=_dev/header-stamp/licence.txt"
+    ],
+    "cs-fixer": [
+      "vendor/bin/php-cs-fixer fix --config tests/php/.php-cs-fixer.dist.php"
+    ]
+  },
+  "type": "prestashop-module"
+}

@@ -1,0 +1,23 @@
+name: PHP tests
+on: [ push, pull_request ]
+jobs:
+  php-linter:
+    name: PHP Syntax check 7.4|8.0|8.1
+    runs-on: ubuntu-latest
+    steps:
+      - name: PHP syntax checker 7.4
+        uses: prestashop/github-action-php-lint/7.4@master
+      - name: PHP syntax checker 8.0
+        uses: prestashop/github-action-php-lint/8.0@master
+      - name: PHP syntax checker 8.1
+        uses: prestashop/github-action-php-lint/8.1@master
+
+  # Check the PHP code follow the coding standards
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+      - name: Run PHP-CS-Fixer
+        uses: prestashopcorp/github-action-php-cs-fixer@master

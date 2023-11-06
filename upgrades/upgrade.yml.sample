@@ -1,0 +1,18 @@
+#Actions sur la configuration
+configuration:
+  add_or_update:
+    TEST_CONFIGURATION : 'test de valeur avec modif'
+  delete:
+    - TEST_A_SUPPRIMER
+#Actions sur les modules
+modules:
+  enable:
+  disable:
+    - ps_emailsubscription
+  install:
+    - psgdpr
+  uninstall:
+    - ps_emailalerts
+    - welcome
+  update:
+    - ps_currencyselector

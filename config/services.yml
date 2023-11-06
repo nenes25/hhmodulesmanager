@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    public: true
+
+  hhennes.modulesmanager.manage.command:
+    class: Hhennes\ModulesManager\Commands\ManageModulesCommand
+    tags:
+      - { name: console.command }
+  hhennes.modulesmanager.upgrade.list:
+    class: Hhennes\ModulesManager\Commands\GenerateModulesUpgradeListCommand
+    tags:
+      - { name: console.command }
