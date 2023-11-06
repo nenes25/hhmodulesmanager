@@ -5,7 +5,7 @@ cd $buildDir
 rm -rf $moduleName
 git clone git@github.com:nenes25/${moduleName}.git $moduleName
 cd $moduleName
-php7.4 `which composer2` install
+php7.4 `which composer2` install --no-dev
 rm -rf .git/
 rm -rf .github/
 rm -rf .gitignore
