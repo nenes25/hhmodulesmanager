@@ -172,21 +172,6 @@ class changeController extends ModuleAdminController
     }
 
     /**
-     * Add button in Toolbar
-     *
-     * @return void
-     */
-    public function initPageHeaderToolbar()
-    {
-        $this->page_header_toolbar_btn['new_object'] = [
-            'href' => self::$currentIndex . '&addchange&token=' . $this->token,
-            'desc' => $this->l('Add new object'),
-            'icon' => 'process-icon-new',
-        ];
-        parent::initPageHeaderToolbar();
-    }
-
-    /**
      * Génération de l'update
      *
      * @return void
