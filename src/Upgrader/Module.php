@@ -22,6 +22,9 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 class Module implements UpgraderInterface
 {
+    /** @var string Type d'upgrade */
+    public const TYPE = 'modules';
+
     public const KEY_ENABLE = 'enable';
     public const KEY_DISABLE = 'disable';
     public const KEY_INSTALL = 'install';
@@ -34,10 +37,15 @@ class Module implements UpgraderInterface
     protected array $success = [];
 
     /**
-     * @param array $config
+     * @param array $data
      */
-    public function upgrade(array $config): void
+    public function upgrade(array $data): void
     {
+        if  ( !array_key_exists(self::TYPE,$data)){
+            return;
+        }
+        $data = $data[self::TYPE];
+
         $configParts = [
             self::KEY_ENABLE,
             self::KEY_DISABLE,
@@ -50,9 +58,9 @@ class Module implements UpgraderInterface
         $this->moduleManager = $moduleManagerBuilder->build();
 
         foreach ($configParts as $configPart) {
-            if (array_key_exists($configPart, $config) && is_array($config[$configPart]) && count($config[$configPart])) {
+            if (array_key_exists($configPart, $data) && is_array($data[$configPart]) && count($data[$configPart])) {
                 $method = 'upgrade' . ucfirst($configPart);
-                $this->$method($config[$configPart]);
+                $this->$method($data[$configPart]);
             }
         }
     }

@@ -21,14 +21,22 @@ use Configuration as LegacyConfiguration;
 
 class Configuration implements UpgraderInterface
 {
+    /** @var string Type d'upgrade */
+    public const TYPE = 'configuration';
+
     protected array $errors = [];
     protected array $success = [];
 
     /**
      * @param array $data
      */
-    public function upgrade(array $data)
+    public function upgrade(array $data) :void
     {
+        if  ( !array_key_exists(self::TYPE,$data)){
+            return;
+        }
+        $data = $data[self::TYPE];
+
         //Add or update Configuration
         if (array_key_exists('add_or_update', $data)
             && is_array($data['add_or_update'])

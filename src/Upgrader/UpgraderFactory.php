@@ -17,28 +17,39 @@
 
 namespace Hhennes\ModulesManager\Upgrader;
 
-interface UpgraderInterface
+class UpgraderFactory
 {
+    /** @var UpgraderInterface[] */
+    private array $upgraders = [];
+
     /**
-     * Lancement de la mise à jour
+     * @param iterable $upgraders
+     */
+    public function __construct(iterable $upgraders =[])
+    {
+        foreach ($upgraders as $upgrader) {
+            $this->addUpgrader($upgrader);
+        }
+    }
+
+    /**
+     * Add a new upgrader
      *
-     * @param array $data
-     *
+     * @param UpgraderInterface $upgrader
      * @return void
      */
-    public function upgrade(array $data) :void;
+    public function addUpgrader(UpgraderInterface $upgrader):void
+    {
+        $this->upgraders[] = $upgrader;
+    }
 
     /**
-     * Récupération de la liste des actions effectuées avec succès
+     * Get the list of available upgraders
      *
-     * @return array Liste des actions effectuées avec succès
+     * @return UpgraderInterface[]
      */
-    public function getSuccess(): array;
-
-    /**
-     * Récupération de la liste des erreurs rencontrées
-     *
-     * @return array Liste des erreurs rencontrées
-     */
-    public function getErrors(): array;
+    public function getUpgraders():array
+    {
+        return $this->upgraders;
+    }
 }

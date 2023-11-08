@@ -20,7 +20,7 @@ namespace Hhennes\ModulesManager\Converter;
 use Exception;
 use Hhennes\ModulesManager\Change;
 
-class ConfigurationConverter implements ConverterInterface
+class Configuration implements ConverterInterface
 {
     /** @var string Type d'upgrade */
     public const TYPE = 'configuration';
@@ -38,6 +38,14 @@ class ConfigurationConverter implements ConverterInterface
 
     /** @var string Action de suppression d'une config */
     public const KEY_DELETE = 'delete';
+
+    /**
+     * {@inheritDoc}
+     */
+    public function canConvert(Change $change): bool
+    {
+        return $change->entity == self::TYPE;
+    }
 
     /**
      * {@inheritDoc}

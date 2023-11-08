@@ -36,7 +36,7 @@ class HhModulesManager extends Module
     {
         $this->name = 'hhmodulesmanager';
         $this->tab = 'administration';
-        $this->version = '0.2.0';
+        $this->version = '0.3.0';
         $this->author = 'hhennes';
         $this->bootstrap = true;
         parent::__construct();
@@ -219,6 +219,22 @@ class HhModulesManager extends Module
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+
+    /**
+     * @Todo use monolog
+     *
+     * @param string $message
+     * @param int $level
+     * @return void
+     */
+    public function log(string $message, int $level = 0):void
+    {
+        file_put_contents(
+            dirname(__FILE__) . '/logs/'.date('Y-m-d').'.log',
+            date('Y-m-d H:i:s').' '.$message."\n",
+            FILE_APPEND
+        );
     }
 
     /**

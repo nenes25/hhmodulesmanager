@@ -14,29 +14,44 @@
  * @copyright since 2023 Hervé HENNES
  * @license   https://opensource.org/licenses/AFL-3.0  Academic Free License ("AFL") v. 3.0
  */
-
 namespace Hhennes\ModulesManager\Converter;
 
-use Hhennes\ModulesManager\Change;
+use Hhennes\ModulesManager\Converter\ConverterInterface;
 
-interface ConverterInterface
+class ConverterFactory
 {
-    /**
-     * Conversion du changement sous forme d'un tableau qui s'ajoute au tableau des modifications
-     *
-     * @param Change $change
-     * @param array $currentChangesArray
-     *
-     * @throws \Exception
-     */
-    public function convert(Change $change, array &$currentChangesArray): void;
+
+    /** @var ConverterInterface[] */
+    private array $converters = [];
 
     /**
-     * Define if the converter can convert the current change
-     *
-     * @param Change $change
-     *
-     * @return bool
+     * @param iterable $converters
      */
-    public function canConvert(Change $change):bool;
+    public function __construct(iterable $converters =[])
+    {
+        foreach ($converters as $converter) {
+            $this->addConverter($converter);
+        }
+    }
+
+    /**
+     * Add a new converter
+     *
+     * @param ConverterInterface $upgrader
+     * @return void
+     */
+    public function addConverter(ConverterInterface $upgrader):void
+    {
+        $this->converters[] = $upgrader;
+    }
+
+    /**
+     * Get the list of available converters
+     *
+     * @return ConverterInterface[]
+     */
+    public function getConverters():array
+    {
+        return $this->converters;
+    }
 }

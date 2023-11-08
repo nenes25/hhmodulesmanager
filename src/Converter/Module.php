@@ -20,7 +20,7 @@ namespace Hhennes\ModulesManager\Converter;
 use Exception;
 use Hhennes\ModulesManager\Change;
 
-class ModuleConverter implements ConverterInterface
+class Module implements ConverterInterface
 {
     /** @var string Type d'upgrade */
     public const TYPE = 'modules';
@@ -39,6 +39,14 @@ class ModuleConverter implements ConverterInterface
     /**
      * {@inheritDoc}
      */
+    public function canConvert(Change $change): bool
+    {
+        return $change->entity == 'module'; //@todo Harmoniser ici le code "modules" et "module"
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function convert(Change $change, array &$currentChangesArray): void
     {
         //Initialisation du premier niveau
@@ -46,7 +54,9 @@ class ModuleConverter implements ConverterInterface
             $currentChangesArray[self::TYPE] = [];
         }
         if (!in_array($change->action, self::ALLOWED_ACTIONS)) {
-            throw new Exception('Unknow configuration action , allowed values : ' . implode(',', self::ALLOWED_ACTIONS));
+            throw new Exception(
+                'Unknow configuration action , allowed values : '
+                . implode(',', self::ALLOWED_ACTIONS));
         }
         if (!array_key_exists($change->action, $currentChangesArray[self::TYPE])) {
             $currentChangesArray[self::TYPE][$change->action] = [];

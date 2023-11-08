@@ -2,6 +2,43 @@ services:
   _defaults:
     public: true
 
+  #List of converters
+  hhennes.modulesmanager.converter.configuration:
+    class: Hhennes\ModulesManager\Converter\Configuration
+    tags: [ hhennes.modulesmanager.converter ]
+  hhennes.modulesmanager.converter.modules:
+    class: Hhennes\ModulesManager\Converter\Module
+    tags: [ hhennes.modulesmanager.converter ]
+  hhennes.modulesmanager.converter.factory:
+    class: Hhennes\ModulesManager\Converter\ConverterFactory
+    arguments:
+      - !tagged hhennes.modulesmanager.converter
+  #Management of converters
+  hhennes.modulesmanager.patch.generator:
+    class: Hhennes\ModulesManager\Patch\Generator
+    arguments:
+      - '@hhennes.modulesmanager.converter.factory'
+
+
+  #List of upgraders
+  hhennes.modulesmanager.upgrader.configuration:
+    class: Hhennes\ModulesManager\Upgrader\Configuration
+    tags: [ hhennes.modulesmanager.upgrader]
+  hhennes.modulesmanager.upgrader.modules:
+    class: Hhennes\ModulesManager\Upgrader\Module
+    tags: [ hhennes.modulesmanager.upgrader ]
+  hhennes.modulesmanager.upgrader.factory:
+    class: Hhennes\ModulesManager\Upgrader\UpgraderFactory
+    arguments:
+      - !tagged hhennes.modulesmanager.upgrader
+
+  #Management of the upgrade
+  hhennes.modulesmanager.manager:
+    class: Hhennes\ModulesManager\Patch\Manager
+    arguments:
+      - '@hhennes.modulesmanager.upgrader.factory'
+
+  #Console commands
   hhennes.modulesmanager.manage.command:
     class: Hhennes\ModulesManager\Commands\ManageModulesCommand
     tags:

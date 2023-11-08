@@ -172,6 +172,21 @@ class changeController extends ModuleAdminController
     }
 
     /**
+     * Add button in Toolbar
+     *
+     * @return void
+     */
+    public function initPageHeaderToolbar()
+    {
+        $this->page_header_toolbar_btn['new_object'] = [
+            'href' => self::$currentIndex . '&addhhmodulesmanager_change&token=' . $this->token,
+            'desc' => $this->l('Add new change'),
+            'icon' => 'process-icon-new',
+        ];
+        parent::initPageHeaderToolbar();
+    }
+
+    /**
      * Génération de l'update
      *
      * @return void
@@ -180,9 +195,14 @@ class changeController extends ModuleAdminController
     {
         try {
             $changeIds = Tools::getValue('hhmodulesmanager_changeBox');
-            Change::generateChangeFile($changeIds, date('Ymd-His') . '-patch');
+            /** @var \Hhennes\ModulesManager\Patch\Generator $patchGenerator */
+            $patchGenerator = $this->get('hhennes.modulesmanager.patch.generator');
+            $patchGenerator->generateChangeFile($changeIds, date('Ymd-His') . '-patch');
             $this->setRedirectAfter(self::$currentIndex . '&token=' . $this->token . '&conf=99');
         } catch (Exception $e) {
+            $this->module->log(
+                'ERROR - ' .__METHOD__.'- Unable to generate patch , get error '.$e->getMessage()
+            );
             $this->setRedirectAfter(self::$currentIndex . '&token=' . $this->token . '&error=99');
         }
     }
