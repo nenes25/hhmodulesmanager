@@ -4,6 +4,8 @@ global $_MODULE;
 $_MODULE = array();
 $_MODULE['<{hhmodulesmanager}prestashop>hhmodulesmanager_ec4709d75a4c183bf68303d520fde71a'] = 'Gestion avancée des modules';
 $_MODULE['<{hhmodulesmanager}prestashop>hhmodulesmanager_0783f1d2570d6cd8390cc14f706b273b'] = 'Gestion avancées des modules via la ligne de commande et le déploiement continu';
+$_MODULE['<{hhmodulesmanager}prestashop>hhmodulesmanager_50243c2a5c101708abea6c3f59a78d81'] = 'La mise à jour des modules est désactivé dans le back office.';
+$_MODULE['<{hhmodulesmanager}prestashop>hhmodulesmanager_57ceb113fbb38d18c22bbdbaab4b882a'] = 'Merci de changer la configuration du module hhmodulesmanager si nécessaire.';
 $_MODULE['<{hhmodulesmanager}prestashop>installer_a3675619eeee170c8f63121442e2abe9'] = 'Gestion des changements';
 $_MODULE['<{hhmodulesmanager}prestashop>configform_597582c140dd691b522fe42299a24d34'] = 'Paramètres mis à jour';
 $_MODULE['<{hhmodulesmanager}prestashop>configform_b9129c167a73844d16d28b0949719155'] = 'Impossible de mettre à jour les paramètres';

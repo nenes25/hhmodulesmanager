@@ -30,6 +30,8 @@ class HhModulesManager extends Module
      */
     public const EXCLUDED_CONFIGURATIONS = [
         'HHMODULESMANAGER_ENABLE_CHANGE_RECORDER',
+        'PS_CCCJS_VERSION',
+        'PS_CCCCSS_VERSION'
     ];
 
     public function __construct()
@@ -175,10 +177,8 @@ class HhModulesManager extends Module
     {
         if ( ! Configuration::get('HHMODULESMANAGER_ENABLE_BO_MODULES_UPDATE')) {
             return '<div class="alert alert-warning align-content-center">'.
-                $this->l(
-                    'Modules upgrades are disabled into the back office on this environnement, please check hhmodulesmanager '
-                    .'configuration  if you need to update them'
-                ).
+                $this->l('Modules upgrades are disabled into the back office on this environnement.').'<br />'.
+                $this->l('Please check hhmodulesmanager configuration  if you need to update them').
                 '</div>';
         }
         return '';
@@ -195,7 +195,7 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Défini si la cla est exclu des changements de conf
+     * Define if configuration is excluded from recording
      *
      * @param string $key
      *
@@ -203,7 +203,16 @@ class HhModulesManager extends Module
      */
     protected function isExludedConfiguration($key): bool
     {
-        return in_array($key, self::EXCLUDED_CONFIGURATIONS);
+        $excludedConfigurations = [];
+        Hook::exec(
+            'actionHhmodulesmanagerExcludeConfiguration',
+            ['configuration' => &$excludedConfigurations],
+            null,
+            true
+        );
+        $excludedConfigurations = array_merge($excludedConfigurations,self::EXCLUDED_CONFIGURATIONS);
+
+        return in_array($key,$excludedConfigurations );
     }
 
     /**
