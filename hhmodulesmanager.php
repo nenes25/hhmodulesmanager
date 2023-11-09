@@ -166,6 +166,25 @@ class HhModulesManager extends Module
     }
 
     /**
+     * Hook (custom) dans le back office pour afficher un message d'information sur la désactivation des mises à jour
+     *
+     * @param array $params
+     * @return string
+     */
+    public function hookDisplayAdminModulesListHeader(array $params): string
+    {
+        if ( ! Configuration::get('HHMODULESMANAGER_ENABLE_BO_MODULES_UPDATE')) {
+            return '<div class="alert alert-warning align-content-center">'.
+                $this->l(
+                    'Modules upgrades are disabled into the back office on this environnement, please check hhmodulesmanager '
+                    .'configuration  if you need to update them'
+                ).
+                '</div>';
+        }
+        return '';
+    }
+
+    /**
      * Défini si l'enregistrement des actions est actif
      *
      * @return bool
