@@ -50,7 +50,7 @@ class Manager
     {
         $data = $this->parseUpgradeFile($upgradeFile);
         $this->processUpgrade($data);
-        //$this->registerAppliedPatch($patchName);
+        $this->registerAppliedPatch($patchName);
     }
 
     /**
