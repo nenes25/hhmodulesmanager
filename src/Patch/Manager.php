@@ -41,6 +41,8 @@ class Manager
     }
 
     /**
+     * Apply a patch
+     *
      * @param string $upgradeFile
      * @param string $patchName
      *
@@ -54,7 +56,7 @@ class Manager
     }
 
     /**
-     * Analyse et traitement du fichier d'upgrade
+     * Analyze and process the upgrade file
      *
      * @param SplFileInfo $file
      *
@@ -74,7 +76,7 @@ class Manager
     }
 
     /**
-     * Lancement de l'upgrade
+     * Run the upgrade
      *
      * @param array $data
      *
@@ -95,7 +97,7 @@ class Manager
     }
 
     /**
-     * Récupération des fichiers de maj
+     * Get the list of upgrades files
      *
      * @return Finder
      */
@@ -110,7 +112,7 @@ class Manager
     }
 
     /**
-     * Récupération du dossier qui contient les mises à jour
+     * Get the directory where the upgrades files are stored
      *
      * @return string
      */
@@ -120,7 +122,7 @@ class Manager
     }
 
     /**
-     * Récupération de la liste des patchs déjà appliqués
+     * Get the list of already applied patches
      *
      * @return array
      */
@@ -141,11 +143,13 @@ class Manager
     }
 
     /**
-     * Insertion d'un patch
+     * Register the application of a patch
      *
      * @param string $patchName
      *
      * @return void
+     *
+     * @throws \PrestaShopDatabaseException
      */
     public function registerAppliedPatch(string $patchName): void
     {

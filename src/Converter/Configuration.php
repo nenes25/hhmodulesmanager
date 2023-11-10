@@ -22,21 +22,21 @@ use Hhennes\ModulesManager\Change;
 
 class Configuration implements ConverterInterface
 {
-    /** @var string Type d'upgrade */
+    /** @var string Converter type */
     public const TYPE = 'configuration';
 
     /**
-     * @var array Liste des actions autorisées
+     * @var array Allowed actions
      */
     public const ALLOWED_ACTIONS = [
-        'add_or_update',
-        'delete',
+        self::KEY_ADD_OR_UPDATE,
+        self::KEY_DELETE,
     ];
 
-    /** @var string Action ajout ou mise à jour */
+    /** @var string Add or update a configuration */
     public const KEY_ADD_OR_UPDATE = 'add_or_update';
 
-    /** @var string Action de suppression d'une config */
+    /** @var string Delete a configuration */
     public const KEY_DELETE = 'delete';
 
     /**

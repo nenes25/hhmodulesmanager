@@ -38,8 +38,6 @@ class changeController extends ModuleAdminController
 
         parent::__construct();
 
-        //Ajout des messages de succès et d'erreur au controller
-        //Avec un identifiant haut pour éviter les conflits
         $this->_conf[99] = $this->l('Update file generated with success in upgrade directory');
         $this->_error[99] = $this->l('An error occurs when generating the file');
 
@@ -86,6 +84,8 @@ class changeController extends ModuleAdminController
     }
 
     /**
+     * Get variables for the display of the list
+     *
      * @return array
      */
     public function getTemplateListVars()
@@ -187,7 +187,7 @@ class changeController extends ModuleAdminController
     }
 
     /**
-     * Génération de l'update
+     * Generate the upgrade file with bulk processes
      *
      * @return void
      */

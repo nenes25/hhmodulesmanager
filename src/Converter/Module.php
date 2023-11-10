@@ -22,11 +22,11 @@ use Hhennes\ModulesManager\Change;
 
 class Module implements ConverterInterface
 {
-    /** @var string Type d'upgrade */
+    /** @var string Converter type */
     public const TYPE = 'modules';
 
     /**
-     * Liste des actions autorisées
+     * @var array Allowed actions
      */
     public const ALLOWED_ACTIONS = [
         'install',
@@ -49,7 +49,6 @@ class Module implements ConverterInterface
      */
     public function convert(Change $change, array &$currentChangesArray): void
     {
-        //Initialisation du premier niveau
         if (!array_key_exists(self::TYPE, $currentChangesArray)) {
             $currentChangesArray[self::TYPE] = [];
         }

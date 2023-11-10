@@ -22,8 +22,13 @@ use PrestaShop\PrestaShop\Adapter\Module\AdminModuleDataProvider;
 use PrestaShop\PrestaShop\Adapter\Module\Module;
 use PrestaShop\PrestaShop\Core\Module\ModuleCollection;
 
+/**
+ * This class is not used yet as it works only on prestashop 8+
+ * Work In Progress to check how we can use it on older versions too
+ */
 class ModuleDataProvider extends AdminModuleDataProvider
 {
+    /** @var string Configuration name which defines if modules upgrades are enable in back office */
     public const CONFIGURATION_NAME_DISABLE_BO_UPDATE = 'HHMODULESMANAGER_ENABLE_BO_MODULES_UPDATE';
 
     /**
@@ -35,7 +40,7 @@ class ModuleDataProvider extends AdminModuleDataProvider
     public function setActionUrls(ModuleCollection $modules, ?string $specific_action = null): ModuleCollection
     {
         if (!Configuration::get(self::CONFIGURATION_NAME_DISABLE_BO_UPDATE)) {
-            //Dans le cas ou la mise à jour des modules est désactivée dans l'admin on retire l'action
+            //If module upgrade is disable in configuration, we remove the upgrade action
             if ($upgradeIndex = array_search(Module::ACTION_UPGRADE, $this->moduleActions)) {
                 unset($this->moduleActions[$upgradeIndex]);
             }

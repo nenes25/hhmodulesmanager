@@ -37,7 +37,7 @@ class Module implements UpgraderInterface
     protected array $success = [];
 
     /**
-     * @param array $data
+     * {@inheritDoc}
      */
     public function upgrade(array $data): void
     {
@@ -66,6 +66,8 @@ class Module implements UpgraderInterface
     }
 
     /**
+     * Run the action of "Enable" a module
+     *
      * @param array $data
      *
      * @throws \Exception
@@ -87,6 +89,8 @@ class Module implements UpgraderInterface
     }
 
     /**
+     * Run the action of "Disable" a module
+     *
      * @param array $data
      *
      * @throws \Exception
@@ -111,6 +115,8 @@ class Module implements UpgraderInterface
     }
 
     /**
+     * Run the action of "Install" a module
+     *
      * @param array $data
      *
      * @throws \Exception
@@ -135,6 +141,8 @@ class Module implements UpgraderInterface
     }
 
     /**
+     * Run the action of "Uninstall" a module
+     *
      * @param array $data
      *
      * @throws \Exception
@@ -159,7 +167,11 @@ class Module implements UpgraderInterface
     }
 
     /**
+     * Run the action of "Upgrade" a module
+     *
      * @param array $data
+     *
+     * @throws \Exception
      */
     public function upgradeUpdate(array $data): void
     {

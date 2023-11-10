@@ -2,3 +2,5 @@ logs/*.log
 upgrades/*.yml
 tests/php/.php-cs-fixer.cache
 vendor/*
+/config.xml
+/config_*.xml

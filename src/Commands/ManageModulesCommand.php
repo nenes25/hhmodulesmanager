@@ -25,17 +25,18 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Commande de gestion de l'upgrade
+ * This command is the main file of the module
+ * It should be called during the CI/CD process to run the registered upgrades
  */
 class ManageModulesCommand extends ContainerAwareCommand
 {
-    /** @var string Nom du module d'upgrade */
+    /** @var string Upgrade module name */
     protected string $moduleName = 'hhmodulesmanager';
     /** @var OutputInterface|null Sortie de la console */
     protected ?OutputInterface $output;
-    /** @var array Tableau des messages d'erreurs rencontrées */
+    /** @var array Errors of the process */
     protected array $errors = [];
-    /** @var array Tableau des actions réalisées avec succès */
+    /** @var array Successes of the process */
     protected array $success = [];
     /** @var false|Module */
     private $module;
@@ -100,7 +101,7 @@ class ManageModulesCommand extends ContainerAwareCommand
     }
 
     /**
-     * Log et Affichage du résultat de la commande
+     * Log and display the result of the run of the command
      *
      * @param OutputInterface $output
      * @param Manager $manager

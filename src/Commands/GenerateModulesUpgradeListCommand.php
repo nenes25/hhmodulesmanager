@@ -31,7 +31,7 @@ class GenerateModulesUpgradeListCommand extends ContainerAwareCommand
     {
         $this
             ->setName('hhennes:module-manager:generate-modules-upgrade-list')
-            ->setDescription('Generate an upgrade file with all the modules which needs to be upgraded')
+            ->setDescription('List all the modules which can be upgraded')
             ->addOption('ignore', null, InputOption::VALUE_OPTIONAL);
     }
 
@@ -54,9 +54,9 @@ class GenerateModulesUpgradeListCommand extends ContainerAwareCommand
     }
 
     /**
-     * Récupération de la liste des modules qui peuvent être mis à jour
+     * Get the List of the names of the modules that can be upgraded
      *
-     * @return array Liste des noms des modules à mettre à jour
+     * @return array List of the names of the modules that can be upgraded
      */
     protected function getUpgradableModules(): array
     {

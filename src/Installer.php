@@ -26,16 +26,12 @@ use Tab;
 class Installer
 {
     /**
-     * @todo Refaire l'installation de la tab
-     */
-
-    /**
-     * @var HhModulesManager Instance du module
+     * @var HhModulesManager Module instance
      */
     protected $module;
 
     /**
-     * @var array Liste des hooks du module
+     * @var string[] List of modules hooks
      */
     protected $_hooks = [
         'actionModuleInstallAfter',
@@ -61,7 +57,7 @@ class Installer
     }
 
     /**
-     * Installation du module
+     * Module installation
      *
      * @return bool
      */
@@ -77,7 +73,7 @@ class Installer
     }
 
     /**
-     * Désinstallation du module
+     * Module uninstallation
      *
      * @return bool
      */
@@ -89,7 +85,7 @@ class Installer
     }
 
     /**
-     * Création d'une tab pour le controller Admin
+     * Create a tab for the admin controller
      *
      * @return bool
      */
@@ -114,7 +110,7 @@ class Installer
     }
 
     /**
-     * Installation de la table des patchs
+     * Create the patch database
      *
      * @return bool
      */
@@ -132,7 +128,7 @@ class Installer
     }
 
     /**
-     * Suppression de la table des patchs
+     * Delete the patch database
      *
      * @return bool
      */
@@ -142,7 +138,7 @@ class Installer
     }
 
     /**
-     * Désinstallation de la configuration
+     * Remove configurations
      *
      * @return bool
      */

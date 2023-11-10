@@ -21,7 +21,7 @@ use Configuration as LegacyConfiguration;
 
 class Configuration implements UpgraderInterface
 {
-    /** @var string Type d'upgrade */
+    /** @var string Upgrader type */
     public const TYPE = 'configuration';
 
     protected array $errors = [];

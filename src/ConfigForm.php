@@ -157,7 +157,7 @@ class ConfigForm
     }
 
     /**
-     * Récupération des valeurs de configuration
+     * Get form configuration values
      *
      * @return array
      */
@@ -220,7 +220,7 @@ class ConfigForm
     }
 
     /**
-     * Alias pour la fonction de traduction
+     * Alias for translate function
      *
      * @param string $string
      *

@@ -22,7 +22,7 @@ use Hhennes\ModulesManager\Change;
 interface ConverterInterface
 {
     /**
-     * Conversion du changement sous forme d'un tableau qui s'ajoute au tableau des modifications
+     * Convert the change as an array, that we add to the global modifications array
      *
      * @param Change $change
      * @param array $currentChangesArray

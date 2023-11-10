@@ -37,7 +37,7 @@ class Generator
     }
 
     /**
-     * Génération d'un fichier de changements
+     * Generate the change file
      *
      * @param array $changeIds
      * @param string $changeVersion
@@ -58,7 +58,7 @@ class Generator
     }
 
     /**
-     * Récupération du chemin des upgrades
+     * Get the directory where the upgrades files are stored
      *
      * @return string
      */
@@ -68,11 +68,14 @@ class Generator
     }
 
     /**
-     * Génération du tableau récapitulatif des changements
+     * Get an array representing the changes
      *
      * @param int[] $changeIds
      *
      * @return array
+     *
+     * @throws \PrestaShopDatabaseException
+     * @throws \PrestaShopException
      */
     public function generateChangeFileArray(array $changeIds): array
     {

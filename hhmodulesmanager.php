@@ -26,7 +26,7 @@ use Hhennes\ModulesManager\Installer;
 class HhModulesManager extends Module
 {
     /**
-     * Liste des configurations à ignorer
+     * List of ignored configuration
      */
     public const EXCLUDED_CONFIGURATIONS = [
         'HHMODULESMANAGER_ENABLE_CHANGE_RECORDER',
@@ -74,7 +74,7 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Exécuté après l'installation d'un module
+     * Hook executed after a module install
      *
      * @param array $params
      *
@@ -88,7 +88,7 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Hook exécuté après la désinstallation d'un module
+     * Hook executed after a module uninstall
      *
      * @param array $params
      *
@@ -102,7 +102,7 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Hook (custom) pour gérer les mises à jour de modules
+     * Hook (custom) to listen to module upgrades
      *
      * @param array $params
      *
@@ -119,9 +119,9 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Hook (custom) exécuté AVANT la mise à jour d'une configuration
+     * Hook (custom) executed BEFORE updating a configuration
      *
-     * On peut donc détecter si la configuration a changé ou non
+     * So we can check if the configuration have changed or not
      *
      * @param array $params
      */
@@ -139,7 +139,7 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Hook (custom) exécuté AVANT la suppression d'une configuration
+     * Hook (custom) executed BEFORE deleting a configuration
      *
      * @param array $params
      */
@@ -151,7 +151,7 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Hook (custom) exécuté AVANT la suppression d'une configuration dans un contexte spécifique
+     * Hook (custom) executed BEFORE deleting a configuration in a specific context
      *
      * @param array $params
      */
@@ -168,7 +168,9 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Hook (custom) dans le back office pour afficher un message d'information sur la désactivation des mises à jour
+     * Hook (custom) in back office, in the module listing page.
+     *
+     * Allow to display a warning about the disabling of module update
      *
      * @param array $params
      *
@@ -187,7 +189,7 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Défini si l'enregistrement des actions est actif
+     * Define if recording of events is enabled
      *
      * @return bool
      */
@@ -218,12 +220,12 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Historisation des événements
+     * Log the event change
      *
-     * @param string $name Nom de l'événement
-     * @param string $type Type de l'événement
-     * @param string|null $key Clé de l'événement
-     * @param array $details Tableau de détails
+     * @param string $name Event name
+     * @param string $type Event type
+     * @param string|null $key Event key
+     * @param array $details Event array of details
      */
     protected function logEvent(string $name, string $type, ?string $key = null, array $details = []): void
     {
@@ -269,7 +271,7 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Configuration du module
+     * Module configuration
      *
      * @return string
      *

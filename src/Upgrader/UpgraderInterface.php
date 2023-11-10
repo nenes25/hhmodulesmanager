@@ -20,7 +20,7 @@ namespace Hhennes\ModulesManager\Upgrader;
 interface UpgraderInterface
 {
     /**
-     * Lancement de la mise à jour
+     * Run the upgrade
      *
      * @param array $data
      *
@@ -29,16 +29,16 @@ interface UpgraderInterface
     public function upgrade(array $data): void;
 
     /**
-     * Récupération de la liste des actions effectuées avec succès
+     * Get the list of the actions processed with success
      *
-     * @return array Liste des actions effectuées avec succès
+     * @return array List of the actions processed with success
      */
     public function getSuccess(): array;
 
     /**
-     * Récupération de la liste des erreurs rencontrées
+     * Get the list of the errors of the process
      *
-     * @return array Liste des erreurs rencontrées
+     * @return array List of the errors of the process
      */
     public function getErrors(): array;
 }
