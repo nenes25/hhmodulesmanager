@@ -38,5 +38,5 @@ interface ConverterInterface
      *
      * @return bool
      */
-    public function canConvert(Change $change):bool;
+    public function canConvert(Change $change): bool;
 }

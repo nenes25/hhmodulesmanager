@@ -54,9 +54,7 @@ class Module implements ConverterInterface
             $currentChangesArray[self::TYPE] = [];
         }
         if (!in_array($change->action, self::ALLOWED_ACTIONS)) {
-            throw new Exception(
-                'Unknow configuration action , allowed values : '
-                . implode(',', self::ALLOWED_ACTIONS));
+            throw new Exception('Unknow configuration action , allowed values : ' . implode(',', self::ALLOWED_ACTIONS));
         }
         if (!array_key_exists($change->action, $currentChangesArray[self::TYPE])) {
             $currentChangesArray[self::TYPE][$change->action] = [];

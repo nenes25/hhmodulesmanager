@@ -26,7 +26,7 @@ interface UpgraderInterface
      *
      * @return void
      */
-    public function upgrade(array $data) :void;
+    public function upgrade(array $data): void;
 
     /**
      * Récupération de la liste des actions effectuées avec succès

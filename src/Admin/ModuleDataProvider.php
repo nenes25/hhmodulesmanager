@@ -14,16 +14,16 @@
  * @copyright since 2023 Hervé HENNES
  * @license   https://opensource.org/licenses/AFL-3.0  Academic Free License ("AFL") v. 3.0
  */
+
 namespace Hhennes\ModulesManager\Admin;
 
-use \Configuration;
+use Configuration;
 use PrestaShop\PrestaShop\Adapter\Module\AdminModuleDataProvider;
-use PrestaShop\PrestaShop\Core\Module\ModuleCollection;
 use PrestaShop\PrestaShop\Adapter\Module\Module;
+use PrestaShop\PrestaShop\Core\Module\ModuleCollection;
 
 class ModuleDataProvider extends AdminModuleDataProvider
 {
-
     public const CONFIGURATION_NAME_DISABLE_BO_UPDATE = 'HHMODULESMANAGER_ENABLE_BO_MODULES_UPDATE';
 
     /**
@@ -34,12 +34,13 @@ class ModuleDataProvider extends AdminModuleDataProvider
      */
     public function setActionUrls(ModuleCollection $modules, ?string $specific_action = null): ModuleCollection
     {
-        if ( !Configuration::get(self::CONFIGURATION_NAME_DISABLE_BO_UPDATE)) {
+        if (!Configuration::get(self::CONFIGURATION_NAME_DISABLE_BO_UPDATE)) {
             //Dans le cas ou la mise à jour des modules est désactivée dans l'admin on retire l'action
             if ($upgradeIndex = array_search(Module::ACTION_UPGRADE, $this->moduleActions)) {
                 unset($this->moduleActions[$upgradeIndex]);
             }
         }
-        return parent::setActionUrls($modules,$specific_action);
+
+        return parent::setActionUrls($modules, $specific_action);
     }
 }

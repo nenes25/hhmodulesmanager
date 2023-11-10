@@ -14,20 +14,18 @@
  * @copyright since 2023 Hervé HENNES
  * @license   https://opensource.org/licenses/AFL-3.0  Academic Free License ("AFL") v. 3.0
  */
-namespace Hhennes\ModulesManager\Converter;
 
-use Hhennes\ModulesManager\Converter\ConverterInterface;
+namespace Hhennes\ModulesManager\Converter;
 
 class ConverterFactory
 {
-
     /** @var ConverterInterface[] */
     private array $converters = [];
 
     /**
      * @param iterable $converters
      */
-    public function __construct(iterable $converters =[])
+    public function __construct(iterable $converters = [])
     {
         foreach ($converters as $converter) {
             $this->addConverter($converter);
@@ -38,9 +36,10 @@ class ConverterFactory
      * Add a new converter
      *
      * @param ConverterInterface $upgrader
+     *
      * @return void
      */
-    public function addConverter(ConverterInterface $upgrader):void
+    public function addConverter(ConverterInterface $upgrader): void
     {
         $this->converters[] = $upgrader;
     }
@@ -50,7 +49,7 @@ class ConverterFactory
      *
      * @return ConverterInterface[]
      */
-    public function getConverters():array
+    public function getConverters(): array
     {
         return $this->converters;
     }

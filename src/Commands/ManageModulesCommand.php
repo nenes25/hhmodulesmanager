@@ -18,8 +18,8 @@
 namespace Hhennes\ModulesManager\Commands;
 
 use Configuration;
-use Module;
 use Hhennes\ModulesManager\Patch\Manager;
+use Module;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -57,6 +57,7 @@ class ManageModulesCommand extends ContainerAwareCommand
     {
         if (!Configuration::get(strtoupper($this->moduleName) . '_ENABLE_CLI_MODULES_UPDATE')) {
             $output->writeln('<info>Automatic module management is disabled</info>');
+
             return 0;
         }
 
@@ -84,7 +85,6 @@ class ManageModulesCommand extends ContainerAwareCommand
             $this->logAndRenderResult($output, $manager);
             $output->writeln('<info>End of process</info>');
             $this->log('End of upgrade process');
-
         } catch (\Throwable $e) {
             $output->writeln(
                 sprintf(
@@ -92,6 +92,7 @@ class ManageModulesCommand extends ContainerAwareCommand
                     $e->getMessage()
                 )
             );
+
             return 1;
         }
 

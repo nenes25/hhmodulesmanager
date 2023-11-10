@@ -31,7 +31,7 @@ class HhModulesManager extends Module
     public const EXCLUDED_CONFIGURATIONS = [
         'HHMODULESMANAGER_ENABLE_CHANGE_RECORDER',
         'PS_CCCJS_VERSION',
-        'PS_CCCCSS_VERSION'
+        'PS_CCCCSS_VERSION',
     ];
 
     public function __construct()
@@ -171,16 +171,18 @@ class HhModulesManager extends Module
      * Hook (custom) dans le back office pour afficher un message d'information sur la désactivation des mises à jour
      *
      * @param array $params
+     *
      * @return string
      */
     public function hookDisplayAdminModulesListHeader(array $params): string
     {
-        if ( ! Configuration::get('HHMODULESMANAGER_ENABLE_BO_MODULES_UPDATE')) {
-            return '<div class="alert alert-warning align-content-center">'.
-                $this->l('Modules upgrades are disabled into the back office on this environnement.').'<br />'.
-                $this->l('Please check hhmodulesmanager configuration  if you need to update them').
+        if (!Configuration::get('HHMODULESMANAGER_ENABLE_BO_MODULES_UPDATE')) {
+            return '<div class="alert alert-warning align-content-center">' .
+                $this->l('Modules upgrades are disabled into the back office on this environnement.') . '<br />' .
+                $this->l('Please check hhmodulesmanager configuration  if you need to update them') .
                 '</div>';
         }
+
         return '';
     }
 
@@ -210,9 +212,9 @@ class HhModulesManager extends Module
             null,
             true
         );
-        $excludedConfigurations = array_merge($excludedConfigurations,self::EXCLUDED_CONFIGURATIONS);
+        $excludedConfigurations = array_merge($excludedConfigurations, self::EXCLUDED_CONFIGURATIONS);
 
-        return in_array($key,$excludedConfigurations );
+        return in_array($key, $excludedConfigurations);
     }
 
     /**
@@ -254,13 +256,14 @@ class HhModulesManager extends Module
      *
      * @param string $message
      * @param int $level
+     *
      * @return void
      */
-    public function log(string $message, int $level = 0):void
+    public function log(string $message, int $level = 0): void
     {
         file_put_contents(
-            dirname(__FILE__) . '/logs/'.date('Y-m-d').'.log',
-            date('Y-m-d H:i:s').' '.$message."\n",
+            dirname(__FILE__) . '/logs/' . date('Y-m-d') . '.log',
+            date('Y-m-d H:i:s') . ' ' . $message . "\n",
             FILE_APPEND
         );
     }

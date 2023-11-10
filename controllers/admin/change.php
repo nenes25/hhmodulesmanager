@@ -201,7 +201,7 @@ class changeController extends ModuleAdminController
             $this->setRedirectAfter(self::$currentIndex . '&token=' . $this->token . '&conf=99');
         } catch (Exception $e) {
             $this->module->log(
-                'ERROR - ' .__METHOD__.'- Unable to generate patch , get error '.$e->getMessage()
+                'ERROR - ' . __METHOD__ . '- Unable to generate patch , get error ' . $e->getMessage()
             );
             $this->setRedirectAfter(self::$currentIndex . '&token=' . $this->token . '&error=99');
         }

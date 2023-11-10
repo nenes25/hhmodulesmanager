@@ -57,7 +57,6 @@ class Generator
         return $fileName;
     }
 
-
     /**
      * Récupération du chemin des upgrades
      *
@@ -82,8 +81,8 @@ class Generator
             $change = new Change($changeId);
             $changeIsProcessed = false;
             try {
-                foreach ($this->converterFactory->getConverters() as $converter){
-                    if ( $converter->canConvert($change)) {
+                foreach ($this->converterFactory->getConverters() as $converter) {
+                    if ($converter->canConvert($change)) {
                         $converter->convert($change, $currentChanges);
                         $changeIsProcessed = true;
                     }
@@ -95,7 +94,7 @@ class Generator
                 echo $e->getMessage();
             }
         }
+
         return $currentChanges;
     }
-
 }

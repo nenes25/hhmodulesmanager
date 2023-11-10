@@ -44,7 +44,7 @@ class Installer
         'actionConfigurationUpdateValue',
         'actionConfigurationDeleteKey',
         'actionConfigurationDeleteContextKey',
-        'displayAdminModulesListHeader'
+        'displayAdminModulesListHeader',
     ];
     /**
      * @var string

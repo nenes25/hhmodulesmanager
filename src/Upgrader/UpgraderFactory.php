@@ -25,7 +25,7 @@ class UpgraderFactory
     /**
      * @param iterable $upgraders
      */
-    public function __construct(iterable $upgraders =[])
+    public function __construct(iterable $upgraders = [])
     {
         foreach ($upgraders as $upgrader) {
             $this->addUpgrader($upgrader);
@@ -36,9 +36,10 @@ class UpgraderFactory
      * Add a new upgrader
      *
      * @param UpgraderInterface $upgrader
+     *
      * @return void
      */
-    public function addUpgrader(UpgraderInterface $upgrader):void
+    public function addUpgrader(UpgraderInterface $upgrader): void
     {
         $this->upgraders[] = $upgrader;
     }
@@ -48,7 +49,7 @@ class UpgraderFactory
      *
      * @return UpgraderInterface[]
      */
-    public function getUpgraders():array
+    public function getUpgraders(): array
     {
         return $this->upgraders;
     }

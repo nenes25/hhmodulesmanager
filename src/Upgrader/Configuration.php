@@ -30,9 +30,9 @@ class Configuration implements UpgraderInterface
     /**
      * @param array $data
      */
-    public function upgrade(array $data) :void
+    public function upgrade(array $data): void
     {
-        if  ( !array_key_exists(self::TYPE,$data)){
+        if (!array_key_exists(self::TYPE, $data)) {
             return;
         }
         $data = $data[self::TYPE];

@@ -19,10 +19,10 @@
 namespace Hhennes\ModulesManager\Patch;
 
 use Db;
+use Hhennes\ModulesManager\Upgrader\UpgraderFactory;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Parser;
-use Hhennes\ModulesManager\Upgrader\UpgraderFactory;
 
 class Manager
 {
@@ -36,17 +36,17 @@ class Manager
      */
     public function __construct(
         UpgraderFactory $upgraderFactory
-    )
-    {
+    ) {
         $this->upgraderFactory = $upgraderFactory;
     }
 
     /**
      * @param string $upgradeFile
      * @param string $patchName
+     *
      * @return void
      */
-    public function applyPatch($upgradeFile, string $patchName):void
+    public function applyPatch($upgradeFile, string $patchName): void
     {
         $data = $this->parseUpgradeFile($upgradeFile);
         $this->processUpgrade($data);
@@ -64,9 +64,11 @@ class Manager
     {
         try {
             $parser = new Parser();
+
             return $parser->parseFile($file->getPathname());
         } catch (\Exception $e) {
             $this->errors[] = 'Unable to parse configuration';
+
             return [];
         }
     }
@@ -97,9 +99,10 @@ class Manager
      *
      * @return Finder
      */
-    public function getUpgradeFiles():Finder
+    public function getUpgradeFiles(): Finder
     {
         $finder = new Finder();
+
         return $finder->files()
             ->in($this->getUpgradeDirectory())
             ->sortByName()
@@ -156,7 +159,7 @@ class Manager
             Db::getInstance()->update(
                 'hhmodulesmanager_patches',
                 ['name' => pSQL($patchName)],
-                'id_patch=' . (int)$idPatch
+                'id_patch=' . (int) $idPatch
             );
         } else {
             Db::getInstance()->insert(
@@ -181,7 +184,7 @@ class Manager
      *
      * @return array
      */
-    public function getWarnings():array
+    public function getWarnings(): array
     {
         return $this->warnings;
     }
@@ -191,9 +194,8 @@ class Manager
      *
      * @return array
      */
-    public function getSuccess():array
+    public function getSuccess(): array
     {
         return $this->success;
     }
-
 }
