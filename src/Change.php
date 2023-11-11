@@ -17,23 +17,11 @@
 
 namespace Hhennes\ModulesManager;
 
-use Configuration;
 use Db;
-use Hhennes\ModulesManager\Converter\ConfigurationConverter;
-use Hhennes\ModulesManager\Converter\ModuleConverter;
 use ObjectModel;
-use Symfony\Component\Yaml\Yaml;
 
 class Change extends ObjectModel
 {
-    /** @var string Entité configuration */
-    public const CHANGE_ENTITY_CONFIGURATION = 'configuration';
-    /** @var string Entité module */
-    public const CHANGE_ENTITY_MODULE = 'module';
-
-    /** @var string Nom du module */
-    public const MODULE_NAME = 'hhmodulesmanager';
-
     /** @var int Object id */
     public $id;
     /** @var string Nom de l'entité */
@@ -66,84 +54,6 @@ class Change extends ObjectModel
     ];
 
     /**
-     * Génération d'un fichier de changements
-     *
-     * @param array $changeIds
-     * @param string $changeVersion
-     *
-     * @return string
-     *
-     * @throws \PrestaShopDatabaseException
-     * @throws \PrestaShopException
-     */
-    public static function generateChangeFile(array $changeIds, string $changeVersion): string
-    {
-        $orderedChanges = self::generateChangeFileArray($changeIds);
-        $fileName = self::getUpgradePath() . $changeVersion . '.yml';
-        $yaml = Yaml::dump($orderedChanges, 3);
-        file_put_contents(
-            $fileName,
-            $yaml
-        );
-
-        return $fileName;
-    }
-
-    /**
-     * Récupération du chemin des upgrades
-     *
-     * @return string
-     */
-    public static function getUpgradePath(): string
-    {
-        return _PS_MODULE_DIR_ . self::MODULE_NAME . '/upgrades/';
-    }
-
-    /**
-     * Génération du tableau récapitulatif des changements
-     *
-     * @param array $changeIds
-     *
-     * @return array
-     *
-     * @throws \PrestaShopDatabaseException
-     * @throws \PrestaShopException
-     */
-    public static function generateChangeFileArray(array $changeIds): array
-    {
-        $currentChanges = [];
-        $converters = [];
-        foreach ($changeIds as $changeId) {
-            $change = new Change($changeId);
-            $changeIsProcessed = false;
-            try {
-                if ($change->entity == self::CHANGE_ENTITY_CONFIGURATION) {
-                    if (!array_key_exists(self::CHANGE_ENTITY_CONFIGURATION, $converters)) {
-                        $converters[self::CHANGE_ENTITY_CONFIGURATION] = new ConfigurationConverter();
-                    }
-                    $converters[self::CHANGE_ENTITY_CONFIGURATION]->convert($change, $currentChanges);
-                    $changeIsProcessed = true;
-                }
-
-                if ($change->entity == self::CHANGE_ENTITY_MODULE) {
-                    if (!array_key_exists(self::CHANGE_ENTITY_MODULE, $converters)) {
-                        $converters[self::CHANGE_ENTITY_MODULE] = new ModuleConverter();
-                    }
-                    $converters[self::CHANGE_ENTITY_MODULE]->convert($change, $currentChanges);
-                    $changeIsProcessed = true;
-                }
-                if (true === $changeIsProcessed) {
-                    $change->delete();
-                }
-            } catch (\Exception $e) {
-                echo $e->getMessage();
-            }
-        }
-
-        return $currentChanges;
-    }
-
-    /**
      * Installation sql de l'entité
      *
      * @return bool
@@ -156,7 +66,7 @@ class Change extends ObjectModel
                 `entity` VARCHAR (255) NOT NULL,
                 `action` VARCHAR (100) NOT NULL,
                 `key` VARCHAR (100) NULL,
-                `details` VARCHAR (255) NOT NULL,
+                `details` TEXT NOT NULL,
                 `date_add` datetime NOT NULL,
                 `date_upd` datetime NOT NULL,
                 PRIMARY KEY (`id_change`) )

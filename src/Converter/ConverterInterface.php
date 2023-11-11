@@ -19,6 +19,10 @@ namespace Hhennes\ModulesManager\Converter;
 
 use Hhennes\ModulesManager\Change;
 
+/**
+ * Converters are responsable to translate the change details to a yaml syntax
+ * Which will then be managed by an "UpgraderInterface"
+ */
 interface ConverterInterface
 {
     /**
