@@ -41,4 +41,11 @@ interface UpgraderInterface
      * @return array List of the errors of the process
      */
     public function getErrors(): array;
+
+    /**
+     * Reset the results of the upgrade
+     *
+     * @return void
+     */
+    public function resetResults(): void;
 }

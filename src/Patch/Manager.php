@@ -89,6 +89,7 @@ class Manager
                 $upgrader->upgrade($data);
                 $this->errors = array_merge($this->errors, $upgrader->getErrors());
                 $this->success = array_merge($this->success, $upgrader->getSuccess());
+                $upgrader->resetResults();
             } catch (\Exception $e) {
                 $this->errors[] = 'Unable to upgrade data for upgrader ' . get_class($upgrader) .
                     ' error : ' . $e->getMessage();

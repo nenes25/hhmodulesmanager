@@ -21,11 +21,10 @@ use Configuration as LegacyConfiguration;
 
 class Configuration implements UpgraderInterface
 {
+    use UpgraderResultTrait;
+
     /** @var string Upgrader type */
     public const TYPE = 'configuration';
-
-    protected array $errors = [];
-    protected array $success = [];
 
     /**
      * @param array $data
@@ -67,21 +66,5 @@ class Configuration implements UpgraderInterface
                 }
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getSuccess(): array
-    {
-        return $this->success;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getErrors(): array
-    {
-        return $this->errors;
     }
 }

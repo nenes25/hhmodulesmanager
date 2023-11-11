@@ -22,6 +22,8 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 class Module implements UpgraderInterface
 {
+    use UpgraderResultTrait;
+
     /** @var string Type d'upgrade */
     public const TYPE = 'modules';
 
@@ -33,8 +35,6 @@ class Module implements UpgraderInterface
 
     /** @var \PrestaShop\PrestaShop\Core\Addon\Module\ModuleManager */
     protected $moduleManager;
-    protected array $errors = [];
-    protected array $success = [];
 
     /**
      * {@inheritDoc}
@@ -190,21 +190,5 @@ class Module implements UpgraderInterface
                 $this->errors[] = "Can't upgrade module " . $moduleName . ' is not installed';
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getSuccess(): array
-    {
-        return $this->success;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getErrors(): array
-    {
-        return $this->errors;
     }
 }
