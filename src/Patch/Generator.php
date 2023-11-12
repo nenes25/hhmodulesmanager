@@ -43,6 +43,9 @@ class Generator
      * @param string $changeVersion
      *
      * @return string
+     *
+     * @throws \PrestaShopDatabaseException
+     * @throws \PrestaShopException
      */
     public function generateChangeFile(array $changeIds, string $changeVersion): string
     {

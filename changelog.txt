@@ -1,4 +1,4 @@
-V 0.3.0 2023-11-10 : Code refactoring and improvements
+V 0.3.0 2023-11-12 : Code refactoring and improvements
                      Allow to add your owns converters and upgraders from custom modules
                      Add a hook to allow custom modules to exclude some configurations from changes
 V 0.2.0 2023-11-06 : First public release of the module
