@@ -1,5 +1,5 @@
 {
-  "name": "hhennes/modulesmanager",
+  "name": "hhennes/prestashop-modulesmanager",
   "description": "Manage modules from cli in Continuous deployment",
   "license": "AFL",
   "authors": [
