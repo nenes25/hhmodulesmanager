@@ -1,5 +1,11 @@
 name: PHP tests
-on: [ push, pull_request ]
+on:
+  push:
+    paths:
+      - '**.php'
+  pull_request:
+    paths:
+      - '**.php'
 jobs:
   php-linter:
     name: PHP Syntax check 7.4|8.0|8.1
