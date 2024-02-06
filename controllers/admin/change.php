@@ -35,6 +35,7 @@ class changeController extends ModuleAdminController
         $this->context = Context::getContext();
         $this->addRowAction('edit');
         $this->addRowAction('delete');
+        $this->addRowAction('generateUpdate');
 
         parent::__construct();
 
@@ -184,6 +185,52 @@ class changeController extends ModuleAdminController
             'icon' => 'process-icon-new',
         ];
         parent::initPageHeaderToolbar();
+    }
+
+    /**
+     * Display a new action to generate a single update for a row
+     *
+     * @param string $token
+     * @param int $id
+     * @param string|null $name
+     * @return string
+     * @throws SmartyException
+     */
+    public function displaygenerateUpdateLink($token, $id, $name = null) :string
+    {
+        $this->context->smarty->assign(array(
+            'href' => self::$currentIndex .
+                '&' . $this->identifier . '=' . $id .
+                '&action=generateUpdate&token=' . ($token != null ? $token : $this->token),
+            'action' => $this->l('Generate a new update'),
+        ));
+        return $this->context->smarty->fetch(
+            _PS_MODULE_DIR_ . $this->module->name . '/views/templates/admin/change/helpers/list/list_action_update.tpl'
+        );
+    }
+
+    /**
+     * Generate a single update file
+     *
+     * @return void
+     */
+    public function processGenerateUpdate()
+    {
+        if ( $id_change = Tools::getValue('id_change')){
+            try {
+                /** @var \Hhennes\ModulesManager\Patch\Generator $patchGenerator */
+                $patchGenerator = $this->get('hhennes.modulesmanager.patch.generator');
+                $patchGenerator->generateChangeFile([$id_change], date('Ymd-His') . '-patch');
+                $this->setRedirectAfter(self::$currentIndex . '&token=' . $this->token . '&conf=99');
+            } catch (Exception $e) {
+                $this->module->log(
+                    'ERROR - ' . __METHOD__ . '- Unable to generate patch , get error ' . $e->getMessage()
+                );
+                $this->setRedirectAfter(self::$currentIndex . '&token=' . $this->token . '&error=99');
+            }
+        } else {
+            $this->setRedirectAfter(self::$currentIndex . '&token=' . $this->token . '&error=99');
+        }
     }
 
     /**
