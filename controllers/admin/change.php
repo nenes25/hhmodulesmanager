@@ -193,17 +193,20 @@ class changeController extends ModuleAdminController
      * @param string $token
      * @param int $id
      * @param string|null $name
+     *
      * @return string
+     *
      * @throws SmartyException
      */
-    public function displaygenerateUpdateLink($token, $id, $name = null) :string
+    public function displaygenerateUpdateLink($token, $id, $name = null): string
     {
-        $this->context->smarty->assign(array(
+        $this->context->smarty->assign([
             'href' => self::$currentIndex .
                 '&' . $this->identifier . '=' . $id .
                 '&action=generateUpdate&token=' . ($token != null ? $token : $this->token),
             'action' => $this->l('Generate a new update'),
-        ));
+        ]);
+
         return $this->context->smarty->fetch(
             _PS_MODULE_DIR_ . $this->module->name . '/views/templates/admin/change/helpers/list/list_action_update.tpl'
         );
@@ -216,7 +219,7 @@ class changeController extends ModuleAdminController
      */
     public function processGenerateUpdate()
     {
-        if ( $id_change = Tools::getValue('id_change')){
+        if ($id_change = Tools::getValue('id_change')) {
             try {
                 /** @var \Hhennes\ModulesManager\Patch\Generator $patchGenerator */
                 $patchGenerator = $this->get('hhennes.modulesmanager.patch.generator');
