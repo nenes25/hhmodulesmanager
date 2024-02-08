@@ -22,6 +22,7 @@ include dirname(__FILE__) . '/vendor/autoload.php';
 use Hhennes\ModulesManager\Change;
 use Hhennes\ModulesManager\ConfigForm;
 use Hhennes\ModulesManager\Installer;
+use Psr\Log\LoggerInterface;
 
 class HhModulesManager extends Module
 {
@@ -33,6 +34,9 @@ class HhModulesManager extends Module
         'PS_CCCJS_VERSION',
         'PS_CCCCSS_VERSION',
     ];
+
+    /** @var LoggerInterface|null */
+    protected ?LoggerInterface $logger = null;
 
     public function __construct()
     {
@@ -243,31 +247,47 @@ class HhModulesManager extends Module
             $message = date('Y-m-d H:i:s') . ' : '
                 . $name . ' ' . $type . ' ' . json_encode($details) . "\n";
 
-            file_put_contents(
-                dirname(__FILE__) . '/logs/eventlogs.log',
-                $message,
-                FILE_APPEND
-            );
+            $this->log($message);
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
 
     /**
-     * @Todo use monolog
+     * Log data with monolog
      *
      * @param string $message
      * @param int $level
      *
      * @return void
      */
-    public function log(string $message, int $level = 0): void
+    public function log(string $message, int $level = 3): void
     {
-        file_put_contents(
-            dirname(__FILE__) . '/logs/' . date('Y-m-d') . '.log',
-            date('Y-m-d H:i:s') . ' ' . $message . "\n",
-            FILE_APPEND
-        );
+        try {
+            $this->getLogger()->log($level * 100, $message);
+        } catch (Exception $e) {
+            file_put_contents(
+                dirname(__FILE__) . '/logs/exceptions.log',
+                date('Y-m-d H:i:s') . ' ' . $e->getMessage() . "\n",
+                FILE_APPEND
+            );
+        }
+    }
+
+    /**
+     * Get logger interface from service
+     *
+     * @return LoggerInterface
+     *
+     * @throws Exception
+     */
+    protected function getLogger(): LoggerInterface
+    {
+        if (null === $this->logger) {
+            $this->logger = $this->get('hhennes.modulesmanager.logger');
+        }
+
+        return $this->logger;
     }
 
     /**

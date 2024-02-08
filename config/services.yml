@@ -62,3 +62,9 @@ services:
     class: Hhennes\ModulesManager\Commands\GenerateModulesUpgradeListCommand
     tags:
       - { name: console.command }
+  #Logger
+  hhennes.modulesmanager.logger:
+    class: 'Psr\Log\LoggerInterface'
+    factory: [ '@hhennes.modulesmanager.logger.factory', 'build' ]
+  hhennes.modulesmanager.logger.factory:
+    class: 'Hhennes\ModulesManager\Logger\LoggerFactory'
