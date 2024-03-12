@@ -13,7 +13,7 @@ Compatibility
 | Prestashop Version | Compatible |
 |--------------------| ---------|
 | 1.7.8.x | :heavy_check_mark: |
-| 8+                 | :interrobang: Not yet tested |
+| 8.0,8.1                 | :heavy_check_mark: |
 
 
 
@@ -22,4 +22,4 @@ Compatibility
 | Under 7.4   | :x:           |
 | 7.4         | :heavy_check_mark:           |
 | 8.0         | :interrobang: Not yet tested |
-| 8.1         | :interrobang: Not yet tested |
+| 8.1         | :heavy_check_mark: |
