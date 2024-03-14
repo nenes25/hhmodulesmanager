@@ -18,7 +18,9 @@
 namespace Hhennes\ModulesManager;
 
 use Db;
+use Exception;
 use ObjectModel;
+use Validate;
 
 class Change extends ObjectModel
 {
@@ -52,6 +54,60 @@ class Change extends ObjectModel
             'date_upd' => ['type' => self::TYPE_DATE],
         ],
     ];
+
+    /**
+     * Récupération de la liste des changements par filtres
+     *
+     * @param array $filters
+     *
+     * @return array
+     */
+    public static function getChangesByFilters(array $filters): array
+    {
+        try {
+            $filters = array_filter($filters);
+            if (count($filters)) {
+                $changeQuery = (new \DbQuery())->select('id_change')
+                    ->from(self::$definition['table']);
+                foreach ($filters as $key => $filter) {
+                    switch ($key) {
+                        case 'from_date':
+                            if (!Validate::isDate($filter)) {
+                                throw new Exception('Invalid filter "from date"');
+                            }
+                            $changeQuery->where("date_add >='" . $filter . "' OR date_upd >= '" . $filter . "'");
+                            break;
+                        case 'to_date':
+                            if (!Validate::isDate($filter)) {
+                                throw new Exception('Invalid filter "to date"');
+                            }
+                            $changeQuery->where("date_add <='" . $filter . "' OR date_upd <= '" . $filter . "'");
+                            break;
+                        default:
+                            if (false !== strpos($filter, ',')) {
+                                $filterParts = explode(',', $filter);
+                                $cleanAttributes = array_map(function ($item) {
+                                    return "'" . pSQL(trim($item)) . "'";
+                                }, $filterParts);
+                                $cond = 'IN (' . implode(',', $cleanAttributes) . ')';
+                            } else {
+                                $cond = "= '" . $filter . "'";
+                            }
+                            $changeQuery->where($key . ' ' . $cond);
+                            break;
+                    }
+                }
+                $results = Db::getInstance()->executeS($changeQuery);
+                if ($results) {
+                    return array_column($results, 'id_change');
+                }
+            }
+        } catch (Exception $e) {
+            dump(__METHOD__ . ' ' . $e->getMessage());
+        }
+
+        return [];
+    }
 
     /**
      * Installation sql de l'entité

@@ -58,8 +58,12 @@ services:
     class: Hhennes\ModulesManager\Commands\ManageModulesCommand
     tags:
       - { name: console.command }
-  hhennes.modulesmanager.upgrade.list:
-    class: Hhennes\ModulesManager\Commands\GenerateModulesUpgradeListCommand
+  hhennes.modulesmanager.upgradable.modules.list:
+    class: Hhennes\ModulesManager\Commands\ListUpgradableModulesCommand
+    tags:
+      - { name: console.command }
+  hhennes.modulesmanager.upgrade.generate:
+    class: Hhennes\ModulesManager\Commands\GeneratePatchCommand
     tags:
       - { name: console.command }
   #Logger

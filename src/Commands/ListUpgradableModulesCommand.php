@@ -22,7 +22,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateModulesUpgradeListCommand extends ContainerAwareCommand
+class ListUpgradableModulesCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class GenerateModulesUpgradeListCommand extends ContainerAwareCommand
     protected function configure(): void
     {
         $this
-            ->setName('hhennes:module-manager:generate-modules-upgrade-list')
+            ->setName('hhennes:module-manager:list-upgradable-modules')
             ->setDescription('List all the modules which can be upgraded')
             ->addOption('ignore', null, InputOption::VALUE_OPTIONAL);
     }
