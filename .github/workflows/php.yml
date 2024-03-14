@@ -8,7 +8,7 @@ on:
       - '**.php'
 jobs:
   php-linter:
-    name: PHP Syntax check 7.4|8.0|8.1|8.2|8.3
+    name: PHP Syntax check 7.4|8.0|8.1|8.2
     runs-on: ubuntu-latest
     steps:
       - name: PHP syntax checker 7.4
