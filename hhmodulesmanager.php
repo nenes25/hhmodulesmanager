@@ -42,7 +42,7 @@ class HhModulesManager extends Module
     {
         $this->name = 'hhmodulesmanager';
         $this->tab = 'administration';
-        $this->version = '0.3.1';
+        $this->version = '0.4.0';
         $this->author = 'hhennes';
         $this->bootstrap = true;
         parent::__construct();

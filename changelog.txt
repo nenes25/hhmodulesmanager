@@ -1,5 +1,7 @@
-V 0.3.1 2024-02-   : #5 Unable to generate an upgrade if only 1 event
-                   : #
+V 0.4.0 2024-03-14 : #1 Harmonize logs and move them to global var directory
+                     #5 Unable to generate an upgrade if only 1 event
+                     #6 Allow to generate file upgrade from CLI
+                     #7 Rename GenerateModulesUpgradeListCommand
 V 0.3.0 2023-11-12 : Code refactoring and improvements
                      Allow to add your owns converters and upgraders from custom modules
                      Add a hook to allow custom modules to exclude some configurations from changes
