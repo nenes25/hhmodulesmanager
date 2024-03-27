@@ -23,3 +23,8 @@ Compatibility
 | 7.4         | :heavy_check_mark:           |
 | 8.0         | :interrobang: Not yet tested |
 | 8.1         | :heavy_check_mark: |
+
+Warning
+---
+
+The module need to be disabled when doing a Prestashop upgrade.
