@@ -1,3 +1,4 @@
+V 0.4.1 2024-03-27 : #10 Error with logger
 V 0.4.0 2024-03-14 : #1 Harmonize logs and move them to global var directory
                      #5 Unable to generate an upgrade if only 1 event
                      #6 Allow to generate file upgrade from CLI

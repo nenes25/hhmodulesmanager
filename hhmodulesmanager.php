@@ -36,13 +36,13 @@ class HhModulesManager extends Module
     ];
 
     /** @var LoggerInterface|null */
-    protected ?LoggerInterface $logger = null;
+    protected $logger = null;
 
     public function __construct()
     {
         $this->name = 'hhmodulesmanager';
         $this->tab = 'administration';
-        $this->version = '0.4.0';
+        $this->version = '0.4.1';
         $this->author = 'hhennes';
         $this->bootstrap = true;
         parent::__construct();
@@ -264,7 +264,18 @@ class HhModulesManager extends Module
     public function log(string $message, int $level = 3): void
     {
         try {
-            $this->getLogger()->log($level * 100, $message);
+            $logger = $this->getLogger();
+            if ($logger) {
+                $logger->log($level * 100, $message);
+            } else {
+                //In some context the logger might not be defined due to missing symfony context
+                //So we make a fallback
+                file_put_contents(
+                    _PS_ROOT_DIR_ . '/var/logs/' . $this->name . '/' . $this->name . '.log',
+                    '['.date('Y-m-d H:i:s') . '] - '.$this->name .'.'. $level . ' - ' . $message . "\n",
+                    FILE_APPEND
+                );
+            }
         } catch (Exception $e) {
             file_put_contents(
                 dirname(__FILE__) . '/logs/exceptions.log',
@@ -277,11 +288,11 @@ class HhModulesManager extends Module
     /**
      * Get logger interface from service
      *
-     * @return LoggerInterface
+     * @return LoggerInterface|null|false
      *
      * @throws Exception
      */
-    protected function getLogger(): LoggerInterface
+    protected function getLogger()
     {
         if (null === $this->logger) {
             $this->logger = $this->get('hhennes.modulesmanager.logger');
