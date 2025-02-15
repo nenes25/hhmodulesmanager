@@ -40,6 +40,7 @@ class Installer
         'actionConfigurationUpdateValue',
         'actionConfigurationDeleteKey',
         'actionConfigurationDeleteContextKey',
+        'actionTranslationSave',
         'displayAdminModulesListHeader',
     ];
     /**

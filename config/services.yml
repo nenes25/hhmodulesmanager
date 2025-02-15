@@ -9,6 +9,9 @@ services:
   hhennes.modulesmanager.converter.modules:
     class: Hhennes\ModulesManager\Converter\Module
     tags: [ hhennes.modulesmanager.converter ]
+  hhennes.modulesmanager.converter.translation:
+    class: Hhennes\ModulesManager\Converter\Translation
+    tags: [ hhennes.modulesmanager.converter ]
   hhennes.modulesmanager.converter.factory:
     class: Hhennes\ModulesManager\Converter\ConverterFactory
     arguments:
@@ -26,6 +29,9 @@ services:
     tags: [ hhennes.modulesmanager.upgrader]
   hhennes.modulesmanager.upgrader.modules:
     class: Hhennes\ModulesManager\Upgrader\Module
+    tags: [ hhennes.modulesmanager.upgrader ]
+  hhennes.modulesmanager.upgrader.translation:
+    class: Hhennes\ModulesManager\Upgrader\Translation
     tags: [ hhennes.modulesmanager.upgrader ]
   hhennes.modulesmanager.upgrader.factory:
     class: Hhennes\ModulesManager\Upgrader\UpgraderFactory
@@ -52,6 +58,15 @@ services:
 #      - "@=service('prestashop.adapter.legacy.context').getContext().employee"
 #    calls:
 #      - [ setRouter, [ '@router' ] ]
+
+  #Decorator for the translation service to dispatch the event
+  hhennes.modulesmanager.service.translation:
+    class: Hhennes\ModulesManager\Service\TranslationServiceWithHook
+    decorates: prestashop.service.translation
+    arguments:
+      - "@prestashop.core.hook.dispatcher"
+    properties:
+      container: "@service_container"
 
   #Console commands
   hhennes.modulesmanager.manage.command:
