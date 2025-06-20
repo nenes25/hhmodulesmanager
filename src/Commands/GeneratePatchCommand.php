@@ -19,7 +19,8 @@ namespace Hhennes\ModulesManager\Commands;
 
 use Exception;
 use Hhennes\ModulesManager\Change;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Hhennes\ModulesManager\Patch\Generator;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,8 +28,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * This command allow to generate an upgrade file (patch) from the command line
  */
-class GeneratePatchCommand extends ContainerAwareCommand
+class GeneratePatchCommand extends Command
 {
+
+    /**
+     * @param Generator $patchGenerator
+     * @param string|null $name
+     */
+    public function __construct(
+        private readonly Generator $patchGenerator,
+        ?string $name = null
+    )
+    {
+        parent::__construct($name);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -59,9 +73,7 @@ class GeneratePatchCommand extends ContainerAwareCommand
             ];
             $changeIds = Change::getChangesByFilters($filters);
             if (count($changeIds)) {
-                /** @var \Hhennes\ModulesManager\Patch\Generator $patchGenerator */
-                $patchGenerator = $this->getContainer()->get('hhennes.modulesmanager.patch.generator');
-                $upgradeFileName = $patchGenerator->generateChangeFile($changeIds, date('Ymd-His') . '-patch');
+                $upgradeFileName = $this->patchGenerator->generateChangeFile($changeIds, date('Ymd-His') . '-patch');
                 $output->writeln(sprintf('<info>Upgrade file %s generated with success</info>', $upgradeFileName));
             } else {
                 $output->writeln('<info>No changes found for update, no files was generated</info>');

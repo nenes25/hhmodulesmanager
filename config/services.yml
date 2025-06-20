@@ -56,14 +56,20 @@ services:
   #Console commands
   hhennes.modulesmanager.manage.command:
     class: Hhennes\ModulesManager\Commands\ManageModulesCommand
+    arguments:
+      - '@hhennes.modulesmanager.manager'
     tags:
       - { name: console.command }
   hhennes.modulesmanager.upgradable.modules.list:
     class: Hhennes\ModulesManager\Commands\ListUpgradableModulesCommand
+    arguments:
+      - '@PrestaShop\PrestaShop\Core\Module\ModuleRepository'
     tags:
       - { name: console.command }
   hhennes.modulesmanager.upgrade.generate:
     class: Hhennes\ModulesManager\Commands\GeneratePatchCommand
+    arguments:
+      - '@hhennes.modulesmanager.patch.generator'
     tags:
       - { name: console.command }
   #Logger
