@@ -18,13 +18,25 @@
 
 namespace Hhennes\ModulesManager\Commands;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use PrestaShop\PrestaShop\Adapter\LegacyContext;
+use PrestaShop\PrestaShop\Core\ConfigurationInterface;
+use PrestaShop\PrestaShop\Core\Context\ContextBuilderPreparer;
+use PrestaShop\PrestaShop\Core\Module\ModuleRepositoryInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ListUpgradableModulesCommand extends ContainerAwareCommand
+class ListUpgradableModulesCommand extends AbstractContextAwareCommand
 {
+    public function __construct(
+        private readonly ModuleRepositoryInterface $moduleRepository,
+        LegacyContext $legacyContext,
+        ContextBuilderPreparer $contextBuilderPreparer,
+        ConfigurationInterface $configuration,
+    ) {
+        parent::__construct($legacyContext, $contextBuilderPreparer, $configuration);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -62,8 +74,7 @@ class ListUpgradableModulesCommand extends ContainerAwareCommand
     protected function getUpgradableModules(): array
     {
         $modulesNames = [];
-        $moduleRepository = $this->getContainer()->get('prestashop.core.admin.module.repository');
-        $installedModules = $moduleRepository->getInstalledModules();
+        $installedModules = $this->moduleRepository->getInstalledModules();
         foreach ($installedModules as $installedModule) {
             if ($installedModule->canBeUpgraded()) {
                 $modulesNames[] = $installedModule->get('name');
