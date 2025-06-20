@@ -18,7 +18,7 @@ Compatibility
 | Prestashop Version | Compatible |
 |--------------------| ---------|
 | 1.7.8.x | :heavy_check_mark: |
-| 8.x | :heavy_check_mark: - min php version 7.4 |
+| 8.x | :heavy_check_mark: |
 | 9.0 | In progress |
 
 
