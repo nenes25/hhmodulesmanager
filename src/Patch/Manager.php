@@ -34,7 +34,7 @@ class Manager
      * @param UpgraderFactory $upgraderFactory
      */
     public function __construct(
-        UpgraderFactory $upgraderFactory
+        UpgraderFactory $upgraderFactory,
     ) {
         $this->upgraderFactory = $upgraderFactory;
     }

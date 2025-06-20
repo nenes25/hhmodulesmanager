@@ -15,11 +15,11 @@ You can find more information about this module in the following articles (in Fr
 Compatibility
 ---
 
-| Prestashop Version | Compatible |
-|--------------------| ---------|
-| 1.7.8.x | :heavy_check_mark: |
-| 8.x | :heavy_check_mark: |
-| 9.0 | In progress |
+| Prestashop Version | Compatible                                                    |
+|--------------------|---------------------------------------------------------------|
+| 1.7.8.x            | version 0.4.0 and under :heavy_check_mark:                    |
+| 8.0,8.1            | version 0.4.0 and under, or with php 8.1 + :heavy_check_mark: |
+| 9.x                | :heavy_check_mark:  |
 
 
 
@@ -28,6 +28,7 @@ Compatibility
 | Under 7.4   | :x:           |
 | 7.4         | :heavy_check_mark:           |
 | 8.1         | :heavy_check_mark: |
-| 8.2         | :interrobang: Not yet tested |
-| 8.3         | :interrobang: Not yet tested |
+| 8.2         |:heavy_check_mark: |
+| 8.3         | :heavy_check_mark:  |
 | 8.4         | :interrobang: Not yet tested |
+| 8.5         | :interrobang: Not yet tested |
