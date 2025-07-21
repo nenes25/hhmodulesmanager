@@ -31,18 +31,19 @@ class HhModulesManager extends Module
      */
     public const EXCLUDED_CONFIGURATIONS = [
         'HHMODULESMANAGER_ENABLE_CHANGE_RECORDER',
+        'HHMODULESMANAGER_ENABLE_TRANSLATION_TRACKING',
         'PS_CCCJS_VERSION',
         'PS_CCCCSS_VERSION',
     ];
 
     /** @var LoggerInterface|null */
-    protected $logger = null;
+    protected ?LoggerInterface $logger = null;
 
     public function __construct()
     {
         $this->name = 'hhmodulesmanager';
         $this->tab = 'administration';
-        $this->version = '0.4.1';
+        $this->version = '0.5.0';
         $this->author = 'hhennes';
         $this->bootstrap = true;
         parent::__construct();
@@ -190,6 +191,27 @@ class HhModulesManager extends Module
         }
 
         return '';
+    }
+
+    /**
+     * Hook (custom) executed after a translation is saved
+     *
+     * @param array $params
+     *
+     * @return void
+     */
+    public function hookActionTranslationSave(array $params): void
+    {
+        if (!Configuration::get(strtoupper($this->name) . '_ENABLE_TRANSLATION_TRACKING')) {
+            return;
+        }
+
+        $this->logEvent(
+            'translation',
+            'update',
+            $params['translation']['slug'],
+            $params['translation']
+        );
     }
 
     /**
