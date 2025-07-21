@@ -73,6 +73,10 @@ class ConfigForm
                     $this->configPrefix . 'ENABLE_CHANGE_RECORDER',
                     Tools::getValue($this->configPrefix . 'ENABLE_CHANGE_RECORDER')
                 )
+                && Configuration::updateValue(
+                    $this->configPrefix . 'ENABLE_TRANSLATION_TRACKING',
+                    Tools::getValue($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING')
+                )
                 && $this->toggleModuleUpdate((bool) $enableUpdate)) {
                 return $this->module->displayConfirmation($this->l('Settings Updated'));
             } else {
@@ -130,6 +134,17 @@ class ConfigForm
                             ['id' => 'off', 'value' => 0, 'label' => $this->l('No')],
                         ],
                     ],
+                    [
+                        'type' => 'switch',
+                        'label' => $this->l('Enable Translation tracking'),
+                        'name' => $this->configPrefix . 'ENABLE_TRANSLATION_TRACKING',
+                        'hint' => $this->l('Enable tracking of translation changes ? ( Requires Change recorder to be enabled )'),
+                        'required' => true,
+                        'values' => [
+                            ['id' => 'on', 'value' => 1, 'label' => $this->l('Yes')],
+                            ['id' => 'off', 'value' => 0, 'label' => $this->l('No')],
+                        ],
+                    ],
                 ],
                 'submit' => [
                     'title' => $this->l('Save'),
@@ -167,6 +182,7 @@ class ConfigForm
             $this->configPrefix . 'ENABLE_BO_MODULES_UPDATE' => Configuration::get($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE', Tools::getValue($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE')),
             $this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE' => Configuration::get($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE', Tools::getValue($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE')),
             $this->configPrefix . 'ENABLE_CHANGE_RECORDER' => Configuration::get($this->configPrefix . 'ENABLE_CHANGE_RECORDER', Tools::getValue($this->configPrefix . 'ENABLE_CHANGE_RECORDER')),
+            $this->configPrefix . 'ENABLE_TRANSLATION_TRACKING' => Configuration::get($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING', Tools::getValue($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING')),
         ];
     }
 
