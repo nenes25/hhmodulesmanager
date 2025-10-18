@@ -272,7 +272,7 @@ class HhModulesManager extends Module
                 //So we make a fallback
                 file_put_contents(
                     _PS_ROOT_DIR_ . '/var/logs/' . $this->name . '/' . $this->name . '.log',
-                    '['.date('Y-m-d H:i:s') . '] - '.$this->name .'.'. $level . ' - ' . $message . "\n",
+                    '[' . date('Y-m-d H:i:s') . '] - ' . $this->name . '.' . $level . ' - ' . $message . "\n",
                     FILE_APPEND
                 );
             }
@@ -288,7 +288,7 @@ class HhModulesManager extends Module
     /**
      * Get logger interface from service
      *
-     * @return LoggerInterface|null|false
+     * @return LoggerInterface|false|null
      *
      * @throws Exception
      */

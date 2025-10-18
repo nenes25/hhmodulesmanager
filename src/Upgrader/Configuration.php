@@ -42,6 +42,11 @@ class Configuration implements UpgraderInterface
             && count($data['add_or_update'])
         ) {
             foreach ($data['add_or_update'] as $key => $value) {
+                // Encode arrays/objects as JSON for storage
+                if (is_array($value) || is_object($value)) {
+                    $value = json_encode($value);
+                }
+
                 if (LegacyConfiguration::updateGlobalValue($key, $value)) {
                     $this->success[] = 'Configuration ' . $key . ' added or updated';
                 } else {

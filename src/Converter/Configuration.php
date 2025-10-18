@@ -72,6 +72,14 @@ class Configuration implements ConverterInterface
         }
 
         $changesDetails = json_decode($change->details, true);
-        $currentChangesArray[self::TYPE][$key][$change->key] = $changesDetails['configuration']['values'];
+        $value = $changesDetails['configuration']['values'];
+        // Decode JSON values to preserve complex data structures (arrays, objects)
+        if (is_string($value)) {
+            $decodedValue = json_decode($value, true);
+            if (json_last_error() === JSON_ERROR_NONE && $decodedValue !== null) {
+                $value = $decodedValue;
+            }
+        }
+        $currentChangesArray[self::TYPE][$key][$change->key] = $value;
     }
 }
