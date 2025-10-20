@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -34,7 +35,7 @@ class Configuration extends ConfigurationCore
         return parent::deleteByName($key);
     }
 
-    public static function deleteFromContext($key, int $idShopGroup = null, int $idShop = null)
+    public static function deleteFromContext($key, ?int $idShopGroup = null, ?int $idShop = null)
     {
         Hook::exec('actionConfigurationDeleteContextKey', ['key' => $key, 'idShop' => $idShop, 'idShopGroup' => $idShopGroup]);
         parent::deleteFromContext($key, $idShopGroup, $idShop);

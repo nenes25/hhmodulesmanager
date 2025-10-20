@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -17,7 +18,6 @@
 
 namespace Hhennes\ModulesManager\Commands;
 
-use Configuration;
 use Hhennes\ModulesManager\Patch\Manager;
 use Module;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -38,7 +38,7 @@ class ManageModulesCommand extends ContainerAwareCommand
     protected array $errors = [];
     /** @var array Successes of the process */
     protected array $success = [];
-    /** @var false|Module */
+    /** @var false|\Module */
     private $module;
 
     /**
@@ -56,7 +56,7 @@ class ManageModulesCommand extends ContainerAwareCommand
      */
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        if (!Configuration::get(strtoupper($this->moduleName) . '_ENABLE_CLI_MODULES_UPDATE')) {
+        if (!\Configuration::get(strtoupper($this->moduleName) . '_ENABLE_CLI_MODULES_UPDATE')) {
             $output->writeln('<info>Automatic module management is disabled</info>');
 
             return 0;
@@ -64,9 +64,9 @@ class ManageModulesCommand extends ContainerAwareCommand
 
         try {
             $this->output = $output;
-            $this->module = Module::getInstanceByName($this->moduleName);
+            $this->module = \Module::getInstanceByName($this->moduleName);
 
-            /** @var \Hhennes\ModulesManager\Patch\Manager $manager */
+            /** @var Manager $manager */
             $manager = $this->getContainer()->get('hhennes.modulesmanager.manager');
 
             $output->writeln('<info>Module Upgrade command launched</info>');

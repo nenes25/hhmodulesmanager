@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -20,7 +21,7 @@ use Hhennes\ModulesManager\Change;
 
 class changeController extends ModuleAdminController
 {
-    /** @var \HhModulesManager */
+    /** @var HhModulesManager */
     public $module;
 
     public $_error = [];
@@ -91,11 +92,11 @@ class changeController extends ModuleAdminController
      */
     public function getTemplateListVars()
     {
-        //Affichage d'un message d'info dans le cas ou l'enregistrement n'est pas activé
+        // Affichage d'un message d'info dans le cas ou l'enregistrement n'est pas activé
         if (!$this->module->isRecorderEnabled()) {
             return [
-               'display_warning' => true,
-           ];
+                'display_warning' => true,
+            ];
         }
 
         return $this->tpl_list_vars;
@@ -221,7 +222,7 @@ class changeController extends ModuleAdminController
     {
         if ($id_change = Tools::getValue('id_change')) {
             try {
-                /** @var \Hhennes\ModulesManager\Patch\Generator $patchGenerator */
+                /** @var Hhennes\ModulesManager\Patch\Generator $patchGenerator */
                 $patchGenerator = $this->get('hhennes.modulesmanager.patch.generator');
                 $patchGenerator->generateChangeFile([$id_change], date('Ymd-His') . '-patch');
                 $this->setRedirectAfter(self::$currentIndex . '&token=' . $this->token . '&conf=99');
@@ -245,7 +246,7 @@ class changeController extends ModuleAdminController
     {
         try {
             $changeIds = Tools::getValue('hhmodulesmanager_changeBox');
-            /** @var \Hhennes\ModulesManager\Patch\Generator $patchGenerator */
+            /** @var Hhennes\ModulesManager\Patch\Generator $patchGenerator */
             $patchGenerator = $this->get('hhennes.modulesmanager.patch.generator');
             $patchGenerator->generateChangeFile($changeIds, date('Ymd-His') . '-patch');
             $this->setRedirectAfter(self::$currentIndex . '&token=' . $this->token . '&conf=99');

@@ -18,7 +18,6 @@
 
 namespace Hhennes\ModulesManager\Patch;
 
-use Db;
 use Hhennes\ModulesManager\Upgrader\UpgraderFactory;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -130,7 +129,7 @@ class Manager
     public function getAppliedPatches(): array
     {
         try {
-            $patches = Db::getInstance()->executeS(
+            $patches = \Db::getInstance()->executeS(
                 'SELECT name FROM `' . _DB_PREFIX_ . 'hhmodulesmanager_patches`'
             );
             if ($patches && count($patches)) {
@@ -154,20 +153,20 @@ class Manager
      */
     public function registerAppliedPatch(string $patchName): void
     {
-        //Gestion des mises à jours
-        $idPatch = Db::getInstance()->getValue(
+        // Gestion des mises à jours
+        $idPatch = \Db::getInstance()->getValue(
             'SELECT id_patch 
                     FROM ' . _DB_PREFIX_ . "hhmodulesmanager_patches
                     WHERE name ='" . pSQL($patchName) . "'"
         );
         if ($idPatch) {
-            Db::getInstance()->update(
+            \Db::getInstance()->update(
                 'hhmodulesmanager_patches',
                 ['name' => pSQL($patchName)],
                 'id_patch=' . (int) $idPatch
             );
         } else {
-            Db::getInstance()->insert(
+            \Db::getInstance()->insert(
                 'hhmodulesmanager_patches',
                 ['name' => pSQL($patchName)]
             );

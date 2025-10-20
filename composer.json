@@ -13,6 +13,11 @@
       "Hhennes\\ModulesManager\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Hhennes\\ModulesManager\\Tests\\": "tests/"
+    }
+  },
   "config": {
     "prepend-autoloader": false
   },
@@ -22,10 +27,20 @@
     ],
     "cs-fixer": [
       "vendor/bin/php-cs-fixer fix --config tests/php/.php-cs-fixer.dist.php"
+    ],
+    "test": [
+      "phpunit --configuration phpunit.xml.dist"
+    ],
+    "test-unit": [
+      "phpunit --configuration phpunit.xml.dist --testsuite unit"
+    ],
+    "test-integration": [
+      "phpunit --configuration phpunit.xml.dist --testsuite integration"
     ]
   },
   "type": "prestashop-module",
   "require-dev": {
-    "prestashop/php-dev-tools": "^4.3"
+    "prestashop/php-dev-tools": "^4.3",
+    "phpunit/phpunit": "^9.6"
   }
 }

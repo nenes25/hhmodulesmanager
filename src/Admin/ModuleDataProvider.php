@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -39,8 +40,8 @@ class ModuleDataProvider extends AdminModuleDataProvider
      */
     public function setActionUrls(ModuleCollection $modules, ?string $specific_action = null): ModuleCollection
     {
-        if (!Configuration::get(self::CONFIGURATION_NAME_DISABLE_BO_UPDATE)) {
-            //If module upgrade is disable in configuration, we remove the upgrade action
+        if (!\Configuration::get(self::CONFIGURATION_NAME_DISABLE_BO_UPDATE)) {
+            // If module upgrade is disable in configuration, we remove the upgrade action
             if ($upgradeIndex = array_search(Module::ACTION_UPGRADE, $this->moduleActions)) {
                 unset($this->moduleActions[$upgradeIndex]);
             }

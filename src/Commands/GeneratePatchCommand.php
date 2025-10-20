@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -17,7 +18,6 @@
 
 namespace Hhennes\ModulesManager\Commands;
 
-use Exception;
 use Hhennes\ModulesManager\Change;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -66,7 +66,7 @@ class GeneratePatchCommand extends ContainerAwareCommand
             } else {
                 $output->writeln('<info>No changes found for update, no files was generated</info>');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln('<error>An error occurs when trying to generate the upgrade file</error>');
             $output->writeln(sprintf('<error>Exception error %s</error>', $e->getMessage()));
 

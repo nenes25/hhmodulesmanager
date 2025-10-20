@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -17,7 +18,6 @@
 
 namespace Hhennes\ModulesManager\Converter;
 
-use Exception;
 use Hhennes\ModulesManager\Change;
 
 class Translation implements ConverterInterface
@@ -64,7 +64,7 @@ class Translation implements ConverterInterface
                 $key = self::KEY_DELETE;
                 break;
             default:
-                throw new Exception('Unknow translation action , allowed values : ' . implode(',', self::ALLOWED_ACTIONS));
+                throw new \Exception('Unknow translation action , allowed values : ' . implode(',', self::ALLOWED_ACTIONS));
         }
         if (!array_key_exists($key, $currentChangesArray[self::TYPE])) {
             $currentChangesArray[self::TYPE][$key] = [];

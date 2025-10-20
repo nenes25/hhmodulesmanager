@@ -14,6 +14,7 @@ rm -rf .php_cs.cache
 rm -rf .php_cs.dist
 rm -rf tests/
 rm -rf _dev
+rm phpunit.xml.dist
 cd ../
 rm -rf $moduleName.zip
 zip $moduleName.zip -r ${moduleName}/

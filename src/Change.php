@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -17,12 +18,7 @@
 
 namespace Hhennes\ModulesManager;
 
-use Db;
-use Exception;
-use ObjectModel;
-use Validate;
-
-class Change extends ObjectModel
+class Change extends \ObjectModel
 {
     /** @var int Object id */
     public $id;
@@ -72,14 +68,14 @@ class Change extends ObjectModel
                 foreach ($filters as $key => $filter) {
                     switch ($key) {
                         case 'from_date':
-                            if (!Validate::isDate($filter)) {
-                                throw new Exception('Invalid filter "from date"');
+                            if (!\Validate::isDate($filter)) {
+                                throw new \Exception('Invalid filter "from date"');
                             }
                             $changeQuery->where("date_add >='" . $filter . "' OR date_upd >= '" . $filter . "'");
                             break;
                         case 'to_date':
-                            if (!Validate::isDate($filter)) {
-                                throw new Exception('Invalid filter "to date"');
+                            if (!\Validate::isDate($filter)) {
+                                throw new \Exception('Invalid filter "to date"');
                             }
                             $changeQuery->where("date_add <='" . $filter . "' OR date_upd <= '" . $filter . "'");
                             break;
@@ -97,12 +93,12 @@ class Change extends ObjectModel
                             break;
                     }
                 }
-                $results = Db::getInstance()->executeS($changeQuery);
+                $results = \Db::getInstance()->executeS($changeQuery);
                 if ($results) {
                     return array_column($results, 'id_change');
                 }
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             dump(__METHOD__ . ' ' . $e->getMessage());
         }
 
@@ -116,7 +112,7 @@ class Change extends ObjectModel
      */
     public static function installSql()
     {
-        return Db::getInstance()->execute(
+        return \Db::getInstance()->execute(
             'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'hhmodulesmanager_change`(
                 `id_change` int(10) NOT NULL AUTO_INCREMENT,
                 `entity` VARCHAR (255) NOT NULL,
@@ -137,7 +133,7 @@ class Change extends ObjectModel
      */
     public static function uninstallSql()
     {
-        return Db::getInstance()->execute(
+        return \Db::getInstance()->execute(
             'DROP TABLE IF EXISTS ' . _DB_PREFIX_ . 'hhmodulesmanager_change'
         );
     }

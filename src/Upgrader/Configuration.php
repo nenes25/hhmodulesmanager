@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -36,7 +37,7 @@ class Configuration implements UpgraderInterface
         }
         $data = $data[self::TYPE];
 
-        //Add or update Configuration
+        // Add or update Configuration
         if (array_key_exists('add_or_update', $data)
             && is_array($data['add_or_update'])
             && count($data['add_or_update'])
@@ -54,7 +55,7 @@ class Configuration implements UpgraderInterface
                 }
             }
         }
-        //Delete configuration
+        // Delete configuration
         if (array_key_exists('delete', $data)
             && is_array($data['delete'])
             && count($data['delete'])

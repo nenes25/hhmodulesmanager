@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -17,7 +18,6 @@
 
 namespace Hhennes\ModulesManager\Converter;
 
-use Exception;
 use Hhennes\ModulesManager\Change;
 
 class Module implements ConverterInterface
@@ -41,7 +41,7 @@ class Module implements ConverterInterface
      */
     public function canConvert(Change $change): bool
     {
-        return $change->entity == 'module'; //@todo Harmoniser ici le code "modules" et "module"
+        return $change->entity == 'module'; // @todo Harmoniser ici le code "modules" et "module"
     }
 
     /**
@@ -53,7 +53,7 @@ class Module implements ConverterInterface
             $currentChangesArray[self::TYPE] = [];
         }
         if (!in_array($change->action, self::ALLOWED_ACTIONS)) {
-            throw new Exception('Unknow configuration action , allowed values : ' . implode(',', self::ALLOWED_ACTIONS));
+            throw new \Exception('Unknow configuration action , allowed values : ' . implode(',', self::ALLOWED_ACTIONS));
         }
         if (!array_key_exists($change->action, $currentChangesArray[self::TYPE])) {
             $currentChangesArray[self::TYPE][$change->action] = [];
