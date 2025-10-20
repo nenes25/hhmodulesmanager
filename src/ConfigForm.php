@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -18,18 +19,12 @@
 namespace Hhennes\ModulesManager;
 
 use Configuration;
-use Context;
-use Exception;
-use HelperForm;
-use HhModulesManager;
-use Language;
 use Symfony\Component\Filesystem\Filesystem;
-use Tools;
 
 class ConfigForm
 {
     /**
-     * @var HhModulesManager
+     * @var \HhModulesManager
      */
     private $module;
     /**
@@ -37,15 +32,15 @@ class ConfigForm
      */
     private $configPrefix;
     /**
-     * @var Context
+     * @var \Context
      */
     private $context;
 
     /**
-     * @param HhModulesManager $module
-     * @param Context $context
+     * @param \HhModulesManager $module
+     * @param \Context $context
      */
-    public function __construct(HhModulesManager $module, Context $context)
+    public function __construct(\HhModulesManager $module, \Context $context)
     {
         $this->module = $module;
         $this->configPrefix = strtoupper($this->module->name) . '_';
@@ -59,23 +54,23 @@ class ConfigForm
      */
     public function postProcess()
     {
-        if (Tools::isSubmit('SubmitConfigForm')) {
-            $enableUpdate = Tools::getValue($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE');
-            if (Configuration::updateValue(
+        if (\Tools::isSubmit('SubmitConfigForm')) {
+            $enableUpdate = \Tools::getValue($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE');
+            if (\Configuration::updateValue(
                 $this->configPrefix . 'ENABLE_BO_MODULES_UPDATE',
                 $enableUpdate
             )
-                && Configuration::updateValue(
+                && \Configuration::updateValue(
                     $this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE',
-                    Tools::getValue($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE')
+                    \Tools::getValue($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE')
                 )
-                && Configuration::updateValue(
+                && \Configuration::updateValue(
                     $this->configPrefix . 'ENABLE_CHANGE_RECORDER',
-                    Tools::getValue($this->configPrefix . 'ENABLE_CHANGE_RECORDER')
+                    \Tools::getValue($this->configPrefix . 'ENABLE_CHANGE_RECORDER')
                 )
-                && Configuration::updateValue(
+                && \Configuration::updateValue(
                     $this->configPrefix . 'ENABLE_TRANSLATION_TRACKING',
-                    Tools::getValue($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING')
+                    \Tools::getValue($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING')
                 )
                 && $this->toggleModuleUpdate((bool) $enableUpdate)) {
                 return $this->module->displayConfirmation($this->l('Settings Updated'));
@@ -90,7 +85,7 @@ class ConfigForm
      *
      * @return string
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function renderForm(): string
     {
@@ -153,15 +148,15 @@ class ConfigForm
             ],
         ];
 
-        $helper = new HelperForm();
+        $helper = new \HelperForm();
         $helper->show_toolbar = false;
-        $lang = new Language((int) Configuration::get('PS_LANG_DEFAULT'));
+        $lang = new \Language((int) \Configuration::get('PS_LANG_DEFAULT'));
         $helper->default_form_language = $lang->id;
-        $helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
+        $helper->allow_employee_form_lang = \Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? \Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
         $helper->identifier = $this->configPrefix;
         $helper->submit_action = 'SubmitConfigForm';
         $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false) . '&configure=' . $this->module->name . '&tab_module=' . $this->module->tab . '&module_name=' . $this->module->name;
-        $helper->token = Tools::getAdminTokenLite('AdminModules');
+        $helper->token = \Tools::getAdminTokenLite('AdminModules');
         $helper->tpl_vars = [
             'fields_value' => $this->getFieldValues(),
             'languages' => $this->context->controller->getLanguages(),
@@ -179,10 +174,10 @@ class ConfigForm
     protected function getFieldValues(): array
     {
         return [
-            $this->configPrefix . 'ENABLE_BO_MODULES_UPDATE' => Configuration::get($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE', Tools::getValue($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE')),
-            $this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE' => Configuration::get($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE', Tools::getValue($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE')),
-            $this->configPrefix . 'ENABLE_CHANGE_RECORDER' => Configuration::get($this->configPrefix . 'ENABLE_CHANGE_RECORDER', Tools::getValue($this->configPrefix . 'ENABLE_CHANGE_RECORDER')),
-            $this->configPrefix . 'ENABLE_TRANSLATION_TRACKING' => Configuration::get($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING', Tools::getValue($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING')),
+            $this->configPrefix . 'ENABLE_BO_MODULES_UPDATE' => \Configuration::get($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE', \Tools::getValue($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE')),
+            $this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE' => \Configuration::get($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE', \Tools::getValue($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE')),
+            $this->configPrefix . 'ENABLE_CHANGE_RECORDER' => \Configuration::get($this->configPrefix . 'ENABLE_CHANGE_RECORDER', \Tools::getValue($this->configPrefix . 'ENABLE_CHANGE_RECORDER')),
+            $this->configPrefix . 'ENABLE_TRANSLATION_TRACKING' => \Configuration::get($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING', \Tools::getValue($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING')),
         ];
     }
 
@@ -211,7 +206,7 @@ class ConfigForm
                 }
 
                 return true;
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return false;
             }
         }
@@ -229,7 +224,7 @@ class ConfigForm
                 }
 
                 return true;
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return false;
             }
         }

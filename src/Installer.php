@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -17,16 +18,12 @@
 
 namespace Hhennes\ModulesManager;
 
-use Configuration;
-use Db;
-use HhModulesManager;
-use Language;
 use Tab;
 
 class Installer
 {
     /**
-     * @var HhModulesManager Module instance
+     * @var \HhModulesManager Module instance
      */
     protected $module;
 
@@ -49,9 +46,9 @@ class Installer
     protected $configPrefix;
 
     /**
-     * @param HhModulesManager $module
+     * @param \HhModulesManager $module
      */
-    public function __construct(HhModulesManager $module)
+    public function __construct(\HhModulesManager $module)
     {
         $this->module = $module;
         $this->configPrefix = strtoupper($this->module->name) . '_';
@@ -69,8 +66,8 @@ class Installer
             && Change::installSql()
             && $this->installPatchSql()
             && $this->installTab()
-            && Configuration::updateGlobalValue($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE', 0)
-            && Configuration::updateGlobalValue($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE', 1);
+            && \Configuration::updateGlobalValue($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE', 0)
+            && \Configuration::updateGlobalValue($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE', 1);
     }
 
     /**
@@ -92,11 +89,11 @@ class Installer
      */
     protected function installTab(): bool
     {
-        $tab = new Tab();
+        $tab = new \Tab();
         $tab->class_name = 'change';
         $tab->module = $this->module->name;
-        $tab->id_parent = Tab::getIdFromClassName('AdminAdvancedParameters');
-        foreach (Language::getLanguages() as $lang) {
+        $tab->id_parent = \Tab::getIdFromClassName('AdminAdvancedParameters');
+        foreach (\Language::getLanguages() as $lang) {
             $tab->name[$lang['id_lang']] = $this->module->l('Module Manager Changes');
         }
         try {
@@ -117,7 +114,7 @@ class Installer
      */
     protected function installPatchSql(): bool
     {
-        return Db::getInstance()->execute(
+        return \Db::getInstance()->execute(
             'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'hhmodulesmanager_patches`(
                 `id_patch` int(10) NOT NULL AUTO_INCREMENT,
                 `name` VARCHAR (255) NOT NULL,
@@ -135,7 +132,7 @@ class Installer
      */
     protected function uninstallPatchSql(): bool
     {
-        return Db::getInstance()->execute('DROP TABLE IF EXISTS ' . _DB_PREFIX_ . 'hhmodulesmanager_patches');
+        return \Db::getInstance()->execute('DROP TABLE IF EXISTS ' . _DB_PREFIX_ . 'hhmodulesmanager_patches');
     }
 
     /**
@@ -145,8 +142,8 @@ class Installer
      */
     protected function uninstallConfiguration(): bool
     {
-        return Configuration::deleteByName($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE')
-            && Configuration::deleteByName($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE')
-            && Configuration::deleteByName($this->configPrefix . 'ENABLE_CHANGE_RECORDER');
+        return \Configuration::deleteByName($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE')
+            && \Configuration::deleteByName($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE')
+            && \Configuration::deleteByName($this->configPrefix . 'ENABLE_CHANGE_RECORDER');
     }
 }

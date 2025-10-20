@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NOTICE OF LICENSE
  *
@@ -290,8 +291,8 @@ class HhModulesManager extends Module
             if ($logger) {
                 $logger->log($level * 100, $message);
             } else {
-                //In some context the logger might not be defined due to missing symfony context
-                //So we make a fallback
+                // In some context the logger might not be defined due to missing symfony context
+                // So we make a fallback
                 file_put_contents(
                     _PS_ROOT_DIR_ . '/var/logs/' . $this->name . '/' . $this->name . '.log',
                     '[' . date('Y-m-d H:i:s') . '] - ' . $this->name . '.' . $level . ' - ' . $message . "\n",

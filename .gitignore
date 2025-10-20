@@ -4,3 +4,8 @@ tests/php/.php-cs-fixer.cache
 vendor/*
 /config.xml
 /config_*.xml
+
+# PHPUnit
+/.phpunit.result.cache
+/phpunit.xml
+/tests/coverage/
