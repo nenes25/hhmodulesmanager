@@ -311,14 +311,23 @@ class HhModulesManager extends Module
     /**
      * Get logger interface from service
      *
-     * @return LoggerInterface|false|null
+     * @return LoggerInterface|null
      *
      * @throws Exception
      */
     protected function getLogger()
     {
         if (null === $this->logger) {
-            $this->logger = $this->get('hhennes.modulesmanager.logger');
+            try {
+                $logger = $this->get('hhennes.modulesmanager.logger');
+                // The get() method can return false if the service is not available
+                if ($logger instanceof LoggerInterface) {
+                    $this->logger = $logger;
+                }
+            } catch (Exception $e) {
+                // In test or CLI context, the service container might not be available
+                // Keep logger as null
+            }
         }
 
         return $this->logger;

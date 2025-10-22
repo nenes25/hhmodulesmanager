@@ -23,9 +23,21 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // They can be overridden in phpunit.xml for local configuration
 
 // Load PrestaShop config if available and _PS_ROOT_DIR_ is properly configured (for integration tests)
-if (defined('_PS_ROOT_DIR_') && _PS_ROOT_DIR_ !== '/path/to/prestashop') {
-    $configFile = _PS_ROOT_DIR_ . '/config/config.inc.php';
-    if (file_exists($configFile)) {
-        require_once $configFile;
-    }
+// Skip loading if:
+// - _PS_ROOT_DIR_ is not defined
+// - _PS_ROOT_DIR_ is the placeholder value
+// - The config file doesn't exist
+$prestashopLoaded = false;
+if (defined('_PS_ROOT_DIR_')
+    && _PS_ROOT_DIR_ !== '/path/to/prestashop'
+    && is_dir(_PS_ROOT_DIR_)
+    && file_exists(_PS_ROOT_DIR_ . '/config/config.inc.php')
+) {
+    require_once _PS_ROOT_DIR_ . '/config/config.inc.php';
+    $prestashopLoaded = true;
+}
+
+// If PrestaShop is not loaded (CI environment), load minimal stubs for unit tests
+if (!$prestashopLoaded) {
+    require_once __DIR__ . '/stubs.php';
 }
