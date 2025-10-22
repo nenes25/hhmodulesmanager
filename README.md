@@ -32,30 +32,3 @@ Compatibility
 | 8.2         | :heavy_check_mark: (Tested in CI) |
 | 8.3         | :heavy_check_mark: (Tested in CI) |
 | 8.4         | :heavy_check_mark: (Linter only) |
-
-## Development
-
-### Running Tests
-
-This module includes a comprehensive test suite with unit and integration tests.
-
-```bash
-# Install dependencies
-composer install
-
-# Run all tests
-composer test
-
-# Run unit tests only
-composer test-unit
-
-# Run integration tests only (requires PrestaShop installation)
-composer test-integration
-```
-
-**Test Coverage:**
-- ✅ 29 unit tests (Converters: Configuration, Module, Translation)
-- ✅ 11 integration tests (Configuration Upgrader)
-- ✅ Automatic CI/CD on PHP 7.4, 8.1, 8.2, 8.3
-
-See [tests/README.md](tests/README.md) for more details on running and writing tests.

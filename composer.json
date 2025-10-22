@@ -29,13 +29,13 @@
       "vendor/bin/php-cs-fixer fix --config tests/php/.php-cs-fixer.dist.php"
     ],
     "test": [
-      "phpunit --configuration phpunit.xml.dist"
+      "phpunit --configuration tests/phpunit.xml.dist"
     ],
     "test-unit": [
-      "phpunit --configuration phpunit.xml.dist --testsuite unit"
+      "phpunit --configuration tests/phpunit.xml.dist --testsuite unit"
     ],
     "test-integration": [
-      "phpunit --configuration phpunit.xml.dist --testsuite integration"
+      "phpunit --configuration tests/phpunit.xml.dist --testsuite integration"
     ]
   },
   "type": "prestashop-module",

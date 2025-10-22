@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="bootstrap.php"
          colors="true"
          verbose="true"
          failOnWarning="false"
@@ -11,20 +11,20 @@
 
     <testsuites>
         <testsuite name="unit">
-            <directory>tests/Unit</directory>
+            <directory>Unit</directory>
         </testsuite>
         <testsuite name="integration">
-            <directory>tests/Integration</directory>
+            <directory>Integration</directory>
         </testsuite>
     </testsuites>
 
     <coverage processUncoveredFiles="true">
         <include>
-            <directory suffix=".php">src</directory>
+            <directory suffix=".php">../src</directory>
         </include>
         <exclude>
-            <directory>src/Commands</directory>
-            <file>src/index.php</file>
+            <directory>../src/Commands</directory>
+            <file>../src/index.php</file>
         </exclude>
     </coverage>
 
