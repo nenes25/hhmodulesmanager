@@ -1,0 +1,166 @@
+{
+  "project": {
+    "name": "PrestaShop Modules - Roadmap 2026",
+    "description": "Dashboard global pour suivre la planification, la progression, et les sprints mensuels des développements sur les modules PrestaShop",
+    "visibility": "public"
+  },
+  "columns": [
+    {
+      "name": "Backlog",
+      "description": "Issues en attente de priorisation"
+    },
+    {
+      "name": "À faire",
+      "description": "Issues priorisées pour le prochain sprint"
+    },
+    {
+      "name": "En cours",
+      "description": "Issues en cours de développement"
+    },
+    {
+      "name": "En revue",
+      "description": "Pull requests en cours de revue"
+    },
+    {
+      "name": "Terminé",
+      "description": "Issues et PRs terminés"
+    }
+  ],
+  "iterations": [
+    {
+      "title": "Mars 2026",
+      "start_date": "2026-03-01",
+      "duration": 4
+    },
+    {
+      "title": "Avril 2026",
+      "start_date": "2026-04-01",
+      "duration": 4
+    },
+    {
+      "title": "Mai 2026",
+      "start_date": "2026-05-01",
+      "duration": 4
+    }
+  ],
+  "labels": {
+    "priority": [
+      {
+        "name": "priority:high",
+        "color": "d73a4a",
+        "description": "Priorité haute"
+      },
+      {
+        "name": "priority:medium",
+        "color": "fbca04",
+        "description": "Priorité moyenne"
+      },
+      {
+        "name": "priority:low",
+        "color": "0e8a16",
+        "description": "Priorité basse"
+      }
+    ],
+    "type": [
+      {
+        "name": "bug",
+        "color": "d73a4a",
+        "description": "Bug ou erreur à corriger"
+      },
+      {
+        "name": "enhancement",
+        "color": "a2eeef",
+        "description": "Nouvelle fonctionnalité ou amélioration"
+      },
+      {
+        "name": "documentation",
+        "color": "0075ca",
+        "description": "Documentation"
+      },
+      {
+        "name": "testing",
+        "color": "d876e3",
+        "description": "Tests"
+      }
+    ],
+    "compatibility": [
+      {
+        "name": "prestashop-9",
+        "color": "5319e7",
+        "description": "Compatible PrestaShop 9.x"
+      },
+      {
+        "name": "php-8.x",
+        "color": "7057ff",
+        "description": "Compatible PHP 8.x"
+      }
+    ],
+    "workflow": [
+      {
+        "name": "need-feedback",
+        "color": "d4c5f9",
+        "description": "Besoin de retour/clarification"
+      },
+      {
+        "name": "ready-to-dev",
+        "color": "c5def5",
+        "description": "Prêt pour le développement"
+      }
+    ]
+  },
+  "repositories": [
+    {
+      "owner": "nenes25",
+      "name": "eicaptcha",
+      "issues": [331, 329, 328, 320, 319, 318, 314]
+    },
+    {
+      "owner": "nenes25",
+      "name": "prestashop_console",
+      "issues": [251, 245, 239, 238, 234, 232, 127, 120, 92, 5]
+    },
+    {
+      "owner": "nenes25",
+      "name": "hhpsmigrationupgradedb",
+      "issues": [19, 18, 3]
+    },
+    {
+      "owner": "nenes25",
+      "name": "hhmodulesmanager",
+      "issues": [22, 20, 16, 14]
+    },
+    {
+      "owner": "nenes25",
+      "name": "hhmodulescatalogapi",
+      "issues": [6, 4, 1]
+    },
+    {
+      "owner": "nenes25",
+      "name": "cronjobs",
+      "issues": []
+    }
+  ],
+  "views": [
+    {
+      "name": "Kanban",
+      "type": "board",
+      "groupBy": "status"
+    },
+    {
+      "name": "Roadmap",
+      "type": "roadmap",
+      "groupBy": "iteration",
+      "layout": "timeline"
+    },
+    {
+      "name": "Par dépôt",
+      "type": "table",
+      "groupBy": "repository"
+    },
+    {
+      "name": "Par priorité",
+      "type": "table",
+      "groupBy": "labels"
+    }
+  ]
+}
