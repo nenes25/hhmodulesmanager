@@ -160,6 +160,10 @@ bulk_label() {
 # Liste les dépôts configurés
 list_repos() {
     echo -e "${YELLOW}Dépôts configurés dans le projet:${NC}\n"
+    if [ ! -f "$CONFIG_FILE" ]; then
+        echo -e "${RED}Fichier de configuration non trouvé: $CONFIG_FILE${NC}"
+        exit 1
+    fi
     jq -r '.repositories[] | "- \(.owner)/\(.name) (\(.issues | length) issues configurées)"' "$CONFIG_FILE"
 }
 
@@ -202,6 +206,18 @@ main() {
         exit 0
     fi
     
+    # Show help without checking requirements
+    if [ "$1" = "help" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        show_help
+        exit 0
+    fi
+    
+    # list-repos doesn't need authentication
+    if [ "$1" = "list-repos" ]; then
+        list_repos
+        exit 0
+    fi
+    
     check_requirements
     
     case "$1" in
@@ -222,9 +238,6 @@ main() {
             ;;
         check-issues)
             check_issues "$2"
-            ;;
-        help|--help|-h)
-            show_help
             ;;
         *)
             echo -e "${RED}Commande inconnue: $1${NC}\n"

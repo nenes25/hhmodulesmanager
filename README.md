@@ -31,3 +31,11 @@ Compatibility
 | 8.2         | :interrobang: Not yet tested |
 | 8.3         | :interrobang: Not yet tested |
 | 8.4         | :interrobang: Not yet tested |
+
+
+## 📊 Project Management
+
+This repository includes tools for managing a **GitHub Project dashboard** across multiple PrestaShop modules.
+
+For setup instructions, see [.github/PROJECT_SETUP.md](.github/PROJECT_SETUP.md) or the [project-setup directory](.github/project-setup/).
+
