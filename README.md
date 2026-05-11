@@ -25,10 +25,9 @@ Compatibility
 
 | Php Version | Compatible                   |
 |-------------|------------------------------|
-| Under 7.4   | :x:           |
-| 7.4         | :heavy_check_mark:           |
-| 8.1         | :heavy_check_mark: |
-| 8.2         |:heavy_check_mark: |
-| 8.3         | :heavy_check_mark:  |
-| 8.4         | :interrobang: Not yet tested |
+| Under 8.1   | :x:                          |
+| 8.1         | :heavy_check_mark:           |
+| 8.2         | :heavy_check_mark:           |
+| 8.3         | :heavy_check_mark:           |
+| 8.4         | :heavy_check_mark:           |
 | 8.5         | :interrobang: Not yet tested |
