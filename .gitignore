@@ -9,3 +9,6 @@ vendor/*
 /.phpunit.result.cache
 /phpunit.xml
 /tests/coverage/
+
+#Dev
+_dev/.env
