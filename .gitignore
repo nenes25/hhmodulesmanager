@@ -7,9 +7,9 @@ vendor/*
 
 # PHPUnit
 /.phpunit.result.cache
-/phpunit.xml
+/tests/.phpunit.result.cache
+/tests/phpunit.xml
 /tests/coverage/
 
 #Dev
 /_dev/.env
-/tests/.phpunit.result.cache

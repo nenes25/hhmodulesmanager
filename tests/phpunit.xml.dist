@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
+         bootstrap="bootstrap.php"
+         colors="true"
+         verbose="true"
+         failOnWarning="false"
+         failOnRisky="false"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true">
+
+    <testsuites>
+        <testsuite name="unit">
+            <directory>Unit</directory>
+        </testsuite>
+        <testsuite name="integration">
+            <directory>Integration</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">../src</directory>
+        </include>
+        <exclude>
+            <directory>../src/Commands</directory>
+            <file>../src/index.php</file>
+        </exclude>
+    </coverage>
+
+    <php>
+        <ini name="display_errors" value="1"/>
+        <ini name="error_reporting" value="-1"/>
+        <ini name="memory_limit" value="-1"/>
+
+        <!-- PrestaShop constants - Override these in phpunit.xml for local configuration -->
+        <const name="_PS_VERSION_" value="8.1.0"/>
+        <const name="_PS_ROOT_DIR_" value="/path/to/prestashop"/>
+        <const name="_PS_MODULE_DIR_" value="/path/to/prestashop/modules/"/>
+        <const name="_DB_PREFIX_" value="ps_"/>
+        <const name="_MYSQL_ENGINE_" value="InnoDB"/>
+        <const name="_PS_MODE_DEV_" value="true"/>
+    </php>
+</phpunit>
