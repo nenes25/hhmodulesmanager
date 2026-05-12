@@ -11,4 +11,5 @@ vendor/*
 /tests/coverage/
 
 #Dev
-_dev/.env
+/_dev/.env
+/tests/.phpunit.result.cache
