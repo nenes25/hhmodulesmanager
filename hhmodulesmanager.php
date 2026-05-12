@@ -47,6 +47,7 @@ class HhModulesManager extends Module
         $this->version = '0.5.0';
         $this->author = 'hhennes';
         $this->bootstrap = true;
+        $this->ps_versions_compliancy = ['min' => '8.0.0', 'max' => '9.99'];
         parent::__construct();
 
         $this->displayName = $this->l('Enhanced modules management');
