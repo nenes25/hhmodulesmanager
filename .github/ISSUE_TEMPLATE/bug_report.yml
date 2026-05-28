@@ -1,0 +1,65 @@
+name: Bug report
+description: You've got a problem with this module, open a new issue
+assignees: nenes25
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for using the module and reporting an issue
+        In order to allow us to help you, please fill the following fields
+  - type: checkboxes
+    id: check_existing_bugs
+    attributes:
+      label: Check if your issue exists
+      options:
+        - label: I confirm that i've searched that my issue does not already exist
+          required: true
+  - type: dropdown
+    id: prestashop_version
+    attributes:
+      label: Your prestashop version
+      description: Which version of prestashop are you using?
+      multiple: false
+      options:
+        - 8.0.x
+        - 8.1.x
+        - 8.2.x
+        - 9.0.x
+        - 9.1.x
+    validations:
+      required: true
+  - type: dropdown
+    id: module_version
+    attributes:
+      label: HhModulesManager version
+      description: Which version of hhmodulesmanager are you using? If your version is not in the list please update the module first
+      multiple: false
+      options:
+        - 0.4.x
+        - 0.5.x
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      placeholder: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Screenshots
+      placeholder: If possible paste a screenshot of the error or the unexpected behavior.
+  - type: textarea
+    attributes:
+      label: Additional context
+      placeholder: Add any other context about the problem here.
