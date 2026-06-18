@@ -1,0 +1,47 @@
+admin_hhmodulesmanager_change_list:
+  path: /hhmodulesmanager/changes
+  methods: [GET]
+  defaults:
+    _controller: 'Hhennes\ModulesManager\Controller\Admin\ChangeController::listAction'
+
+admin_hhmodulesmanager_change_search:
+  path: /hhmodulesmanager/changes
+  methods: [POST]
+  defaults:
+    _controller: 'Hhennes\ModulesManager\Controller\Admin\ChangeController::searchAction'
+
+admin_hhmodulesmanager_change_create:
+  path: /hhmodulesmanager/changes/create
+  methods: [GET, POST]
+  defaults:
+    _controller: 'Hhennes\ModulesManager\Controller\Admin\ChangeController::createAction'
+
+admin_hhmodulesmanager_change_edit:
+  path: /hhmodulesmanager/changes/{changeId}/edit
+  methods: [GET, POST]
+  defaults:
+    _controller: 'Hhennes\ModulesManager\Controller\Admin\ChangeController::editAction'
+
+admin_hhmodulesmanager_change_delete:
+  path: /hhmodulesmanager/changes/{changeId}/delete
+  methods: [POST]
+  defaults:
+    _controller: 'Hhennes\ModulesManager\Controller\Admin\ChangeController::deleteAction'
+
+admin_hhmodulesmanager_change_bulk_delete:
+  path: /hhmodulesmanager/changes/bulk-delete
+  methods: [POST]
+  defaults:
+    _controller: 'Hhennes\ModulesManager\Controller\Admin\ChangeController::bulkDeleteAction'
+
+admin_hhmodulesmanager_change_generate:
+  path: /hhmodulesmanager/changes/{changeId}/generate
+  methods: [POST]
+  defaults:
+    _controller: 'Hhennes\ModulesManager\Controller\Admin\ChangeController::generateAction'
+
+admin_hhmodulesmanager_change_bulk_generate:
+  path: /hhmodulesmanager/changes/bulk-generate
+  methods: [POST]
+  defaults:
+    _controller: 'Hhennes\ModulesManager\Controller\Admin\ChangeController::bulkGenerateAction'

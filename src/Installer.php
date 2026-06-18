@@ -18,8 +18,6 @@
 
 namespace Hhennes\ModulesManager;
 
-use Tab;
-
 class Installer
 {
     /**
@@ -65,7 +63,6 @@ class Installer
             $this->module->registerHook($this->_hooks)
             && Change::installSql()
             && $this->installPatchSql()
-            && $this->installTab()
             && \Configuration::updateGlobalValue($this->configPrefix . 'ENABLE_BO_MODULES_UPDATE', 0)
             && \Configuration::updateGlobalValue($this->configPrefix . 'ENABLE_CLI_MODULES_UPDATE', 1);
     }
@@ -80,31 +77,6 @@ class Installer
         return Change::uninstallSql()
             && $this->uninstallPatchSql()
             && $this->uninstallConfiguration();
-    }
-
-    /**
-     * Create a tab for the admin controller
-     *
-     * @return bool
-     */
-    protected function installTab(): bool
-    {
-        $tab = new \Tab();
-        $tab->class_name = 'change';
-        $tab->module = $this->module->name;
-        $tab->id_parent = \Tab::getIdFromClassName('AdminAdvancedParameters');
-        foreach (\Language::getLanguages() as $lang) {
-            $tab->name[$lang['id_lang']] = $this->module->l('Module Manager Changes');
-        }
-        try {
-            $tab->save();
-        } catch (\Exception $e) {
-            dump($e->getMessage());
-
-            return false;
-        }
-
-        return true;
     }
 
     /**

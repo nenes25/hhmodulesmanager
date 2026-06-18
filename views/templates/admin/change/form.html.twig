@@ -1,0 +1,57 @@
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+{% trans_default_domain 'Modules.Hhmodulesmanager.Admin' %}
+
+{% set layoutTitle = change is defined
+    ? 'Edit change #%id%'|trans({'%id%': change.id}, 'Modules.Hhmodulesmanager.Admin')
+    : 'Add new change'|trans({}, 'Modules.Hhmodulesmanager.Admin')
+%}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label required">{{ 'Entity'|trans({}, 'Admin.Global') }}</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.entity, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label required">{{ 'Action'|trans({}, 'Admin.Actions') }}</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.action, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">{{ 'Key'|trans({}, 'Admin.Global') }}</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.key, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">{{ 'Details'|trans({}, 'Admin.Global') }}</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.details, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-9 offset-sm-3">
+                    <button type="submit" class="btn btn-primary">
+                        {{ 'Save'|trans({}, 'Admin.Actions') }}
+                    </button>
+                    <a href="{{ path('admin_hhmodulesmanager_change_list') }}" class="btn btn-outline-secondary">
+                        {{ 'Cancel'|trans({}, 'Admin.Actions') }}
+                    </a>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
