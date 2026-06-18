@@ -1,0 +1,25 @@
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+{% trans_default_domain 'Modules.Hhmodulesmanager.Admin' %}
+
+{% set layoutHeaderToolbarBtn = {
+    add: {
+        href: path('admin_hhmodulesmanager_change_create'),
+        desc: 'Add new change'|trans({}, 'Modules.Hhmodulesmanager.Admin'),
+        icon: 'add_circle_outline',
+    },
+} %}
+
+{% block content %}
+    {% if display_warning %}
+        <div class="alert alert-warning">
+            {{ 'Change recorder is not enabled. Please enable it in the module configuration.'|trans({}, 'Modules.Hhmodulesmanager.Admin') }}
+        </div>
+    {% endif %}
+    {% include '@PrestaShop/Admin/Common/Grid/grid_panel.html.twig' with {'grid': grid} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('themes/default/js/bundle/pagination.js') }}"></script>
+    <script src="{{ asset('../modules/hhmodulesmanager/views/js/change_grid.js') }}"></script>
+{% endblock %}

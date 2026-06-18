@@ -37,6 +37,21 @@ class HhModulesManager extends Module
         'PS_CCCCSS_VERSION',
     ];
 
+    /** @var array<int, array<string, mixed>> Module tabs */
+    public $tabs = [
+        [
+            'name' => [
+                'en' => 'Module Manager Changes',
+                'fr' => 'Changements du gestionnaire',
+            ],
+            'class_name' => 'AdminHhmodulesmanagerChange',
+            'route_name' => 'admin_hhmodulesmanager_change_list',
+            'parent_class_name' => 'AdminParentModulesSf',
+            'wording' => 'Module Manager Changes',
+            'wording_domain' => 'Modules.Hhmodulesmanager.Admin',
+        ],
+    ];
+
     /** @var LoggerInterface|null */
     protected ?LoggerInterface $logger = null;
 
@@ -44,10 +59,10 @@ class HhModulesManager extends Module
     {
         $this->name = 'hhmodulesmanager';
         $this->tab = 'administration';
-        $this->version = '0.5.0';
+        $this->version = '0.6.0';
         $this->author = 'hhennes';
         $this->bootstrap = true;
-        $this->ps_versions_compliancy = ['min' => '8.0.0', 'max' => '9.99'];
+        $this->ps_versions_compliancy = ['min' => '9.0.0', 'max' => '9.99'];
         parent::__construct();
 
         $this->displayName = $this->l('Enhanced modules management');

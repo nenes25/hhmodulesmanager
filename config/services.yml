@@ -101,3 +101,39 @@ services:
     factory: [ '@hhennes.modulesmanager.logger.factory', 'build' ]
   hhennes.modulesmanager.logger.factory:
     class: 'Hhennes\ModulesManager\Logger\LoggerFactory'
+
+  # Admin controller for Changes grid
+  Hhennes\ModulesManager\Controller\Admin\ChangeController:
+    class: Hhennes\ModulesManager\Controller\Admin\ChangeController
+
+  # Grid services for Changes
+  hhennes.modulesmanager.grid.definition.factory.change:
+    class: Hhennes\ModulesManager\Grid\Definition\Factory\ChangeGridDefinitionFactory
+    parent: 'prestashop.core.grid.definition.factory.abstract_grid_definition'
+    public: true
+    arguments:
+      - '@PrestaShop\PrestaShop\Core\ConfigurationInterface'
+
+  hhennes.modulesmanager.grid.query.change.query_builder:
+    class: Hhennes\ModulesManager\Grid\Query\ChangeQueryBuilder
+    parent: 'prestashop.core.grid.abstract_query_builder'
+    public: true
+    arguments:
+      - '@prestashop.core.query.doctrine_search_criteria_applicator'
+
+  hhennes.modulesmanager.grid.data.factory.change:
+    class: 'PrestaShop\PrestaShop\Core\Grid\Data\Factory\DoctrineGridDataFactory'
+    arguments:
+      - '@hhennes.modulesmanager.grid.query.change.query_builder'
+      - '@prestashop.core.hook.dispatcher'
+      - '@prestashop.core.grid.query.doctrine_query_parser'
+      - 'hhmodulesmanager_change'
+    public: true
+
+  hhennes.modulesmanager.grid.change.grid_factory:
+    class: 'PrestaShop\PrestaShop\Core\Grid\GridFactory'
+    arguments:
+      - '@hhennes.modulesmanager.grid.definition.factory.change'
+      - '@hhennes.modulesmanager.grid.data.factory.change'
+      - '@prestashop.core.grid.filter.form_factory'
+      - '@prestashop.core.hook.dispatcher'
