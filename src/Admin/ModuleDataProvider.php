@@ -23,10 +23,6 @@ use PrestaShop\PrestaShop\Adapter\Module\AdminModuleDataProvider;
 use PrestaShop\PrestaShop\Adapter\Module\Module;
 use PrestaShop\PrestaShop\Core\Module\ModuleCollection;
 
-/**
- * This class is not used yet as it works only on prestashop 8+
- * Work In Progress to check how we can use it on older versions too
- */
 class ModuleDataProvider extends AdminModuleDataProvider
 {
     /** @var string Configuration name which defines if modules upgrades are enable in back office */

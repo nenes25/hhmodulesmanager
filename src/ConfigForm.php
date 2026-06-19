@@ -19,7 +19,6 @@
 namespace Hhennes\ModulesManager;
 
 use Configuration;
-use Symfony\Component\Filesystem\Filesystem;
 
 class ConfigForm
 {
@@ -51,6 +50,8 @@ class ConfigForm
      * Manage configuration upgrade
      *
      * @return string|void
+     *
+     * @throws \PrestaShopException
      */
     public function postProcess()
     {
@@ -71,8 +72,7 @@ class ConfigForm
                 && \Configuration::updateValue(
                     $this->configPrefix . 'ENABLE_TRANSLATION_TRACKING',
                     \Tools::getValue($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING')
-                )
-                && $this->toggleModuleUpdate((bool) $enableUpdate)) {
+                )) {
                 return $this->module->displayConfirmation($this->l('Settings Updated'));
             } else {
                 return $this->module->displayError($this->l('Unable to update settings'));
@@ -179,55 +179,6 @@ class ConfigForm
             $this->configPrefix . 'ENABLE_CHANGE_RECORDER' => \Configuration::get($this->configPrefix . 'ENABLE_CHANGE_RECORDER', \Tools::getValue($this->configPrefix . 'ENABLE_CHANGE_RECORDER')),
             $this->configPrefix . 'ENABLE_TRANSLATION_TRACKING' => \Configuration::get($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING', \Tools::getValue($this->configPrefix . 'ENABLE_TRANSLATION_TRACKING')),
         ];
-    }
-
-    /**
-     * Toggle Module Update by changing template name
-     *
-     * @param bool $enable
-     *
-     * @return bool
-     */
-    protected function toggleModuleUpdate($enable): bool
-    {
-        $fileSystem = new Filesystem();
-        $updagradeTemplatePath = _PS_MODULE_DIR_ . $this->module->name . '/views/PrestaShop/Admin/Module/Includes/';
-
-        if (true === $enable) {
-            try {
-                if ($fileSystem->exists($updagradeTemplatePath . 'action_button.html.twig')) {
-                    $fileSystem->remove($updagradeTemplatePath . 'action_button.html.twig');
-                }
-                if (!$fileSystem->exists($updagradeTemplatePath . 'action_button.html.twig.disabled')) {
-                    $fileSystem->copy(
-                        $updagradeTemplatePath . 'action_button.html.twig.file',
-                        $updagradeTemplatePath . 'action_button.html.twig.disabled'
-                    );
-                }
-
-                return true;
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
-
-        if (false === $enable) {
-            try {
-                if ($fileSystem->exists($updagradeTemplatePath . 'action_button.html.twig.disabled')) {
-                    $fileSystem->remove($updagradeTemplatePath . 'action_button.html.twig.disabled');
-                }
-                if (!$fileSystem->exists($updagradeTemplatePath . 'action_button.html.twig')) {
-                    $fileSystem->copy(
-                        $updagradeTemplatePath . 'action_button.html.twig.file',
-                        $updagradeTemplatePath . 'action_button.html.twig'
-                    );
-                }
-
-                return true;
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
     }
 
     /**
