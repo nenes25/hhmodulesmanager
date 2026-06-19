@@ -48,18 +48,16 @@ services:
 
 
   #Module upgrade filter in back office
-  #Ne fonctionne qu'à partir de prestashop 8+ ...
-  #Voir comment faire cohabiter les différentes versions
-  #Car signatures différentes
-#  hhennes.modulesmanager.adapter.admin.data_provider.module:
-#    class: Hhennes\ModulesManager\Admin\ModuleDataProvider
-#    decorates: prestashop.core.admin.data_provider.module_interface
-#    arguments:
-#      - "@prestashop.categories_provider"
-#      - "@prestashop.adapter.data_provider.module"
-#      - "@=service('prestashop.adapter.legacy.context').getContext().employee"
-#    calls:
-#      - [ setRouter, [ '@router' ] ]
+  hhennes.modulesmanager.adapter.admin.data_provider.module:
+    class: Hhennes\ModulesManager\Admin\ModuleDataProvider
+    decorates: PrestaShop\PrestaShop\Adapter\Module\AdminModuleDataProvider
+    arguments:
+      - "@prestashop.adapter.data_provider.module"
+      - '@translator'
+      - "@=service('prestashop.adapter.legacy.context').getContext().employee"
+      - '@PrestaShop\PrestaShop\Core\Context\ApiClientContext'
+    calls:
+      - [ setRouter, [ '@router' ] ]
 
   #Decorator for the translation service to dispatch the event
   hhennes.modulesmanager.service.translation:
