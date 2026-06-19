@@ -69,6 +69,7 @@ services:
       - "@prestashop.core.hook.dispatcher"
     properties:
       container: "@service_container"
+      validator: "@prestashop.core.validation.validator"
 
   #Console commands
   hhennes.modulesmanager.manage.command:
