@@ -124,19 +124,19 @@ class HhModulesManager extends Module
     }
 
     /**
-     * Hook (custom) to listen to module upgrades
+     * Hook executed after a module upgrade (native PS9 hook)
      *
      * @param array $params
      *
      * @return void
      */
-    public function hookActionModuleUpgradeVersion(array $params): void
+    public function hookActionModuleUpgradeAfter(array $params): void
     {
         $this->logEvent(
             'module',
             'update',
-            $params['module'],
-            ['name' => $params['module'], 'version' => $params['version']]
+            $params['module_name'],
+            ['name' => $params['module_name'], 'version' => $params['new_version']]
         );
     }
 
