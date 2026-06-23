@@ -1,3 +1,8 @@
+V 0.6.0 2026-06-23 : Warning this version is only compatible with PrestaShop 9.0.0 and above
+                                  #31 - Error when saving translation
+                                  #32 - Migrate Admin Controller from legacy to symfony
+                                  #36 - [enhancement]: Manage upgrade button display with configuration
+                                  #39 - [enhancement]: Remove Module override
 V 0.5.0 2026-05-12 : #13 Fix export of complex configurations (JSON arrays/objects)
                                  #15 - Implement transactions tracking
                                  #20 add unit test
