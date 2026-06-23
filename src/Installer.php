@@ -31,7 +31,7 @@ class Installer
     protected $_hooks = [
         'actionModuleInstallAfter',
         'actionModuleUnInstallAfter',
-        'actionModuleUpgradeVersion',
+        'actionModuleUpgradeAfter',
         'actionConfigurationUpdateValue',
         'actionConfigurationDeleteKey',
         'actionConfigurationDeleteContextKey',

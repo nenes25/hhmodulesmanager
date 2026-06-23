@@ -47,8 +47,16 @@ function upgrade_module_0_6_0(HhModulesManager $module): bool
     }
 
     try {
-        return (bool) $tab->save();
+        $result = (bool) $tab->save();
     } catch (Exception $e) {
         return false;
     }
+
+    // Replace custom hook with native PS9 hook and remove the Module override
+    $result = $result
+        && $module->removeOverride('Module')
+        && $module->unregisterHook('actionModuleUpgradeVersion')
+        && $module->registerHook('actionModuleUpgradeAfter');
+
+    return $result;
 }
