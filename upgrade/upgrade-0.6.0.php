@@ -36,25 +36,27 @@ function upgrade_module_0_6_0(HhModulesManager $module): bool
         $tab->delete();
     }
 
-    // Install the new Symfony-backed tab
-    $tab = new Tab();
-    $tab->class_name = 'AdminHhmodulesmanagerChange';
-    $tab->route_name = 'admin_hhmodulesmanager_change_list';
-    $tab->module = $module->name;
-    $tab->id_parent = Tab::getIdFromClassName('AdminParentModulesSf');
-    foreach (Language::getLanguages() as $lang) {
-        $tab->name[$lang['id_lang']] = $module->l('Module Manager Changes');
-    }
+    // Install the new Symfony-backed tab (idempotent: skip if already exists)
+    $result = true;
+    if (!Tab::getIdFromClassName('AdminHhmodulesmanagerChange')) {
+        $tab = new Tab();
+        $tab->class_name = 'AdminHhmodulesmanagerChange';
+        $tab->route_name = 'admin_hhmodulesmanager_change_list';
+        $tab->module = $module->name;
+        $tab->id_parent = Tab::getIdFromClassName('AdminParentModulesSf');
+        foreach (Language::getLanguages() as $lang) {
+            $tab->name[$lang['id_lang']] = $module->l('Module Manager Changes');
+        }
 
-    try {
-        $result = (bool) $tab->save();
-    } catch (Exception $e) {
-        return false;
+        try {
+            $result = (bool) $tab->save();
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     // Replace custom hook with native PS9 hook and remove the Module override
     $result = $result
-        && $module->removeOverride('Module')
         && $module->unregisterHook('actionModuleUpgradeVersion')
         && $module->registerHook('actionModuleUpgradeAfter');
 

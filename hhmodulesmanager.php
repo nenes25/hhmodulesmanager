@@ -59,7 +59,7 @@ class HhModulesManager extends Module
     {
         $this->name = 'hhmodulesmanager';
         $this->tab = 'administration';
-        $this->version = '0.6.0';
+        $this->version = '0.6.1';
         $this->author = 'hhennes';
         $this->bootstrap = true;
         $this->ps_versions_compliancy = ['min' => '9.0.0', 'max' => '9.99'];
