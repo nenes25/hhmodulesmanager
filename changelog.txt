@@ -1,3 +1,4 @@
+V 0.6.1 2026-06-27 : #42 - Fix 0.6.0 upgrade script
 V 0.6.0 2026-06-23 : Warning this version is only compatible with PrestaShop 9.0.0 and above
                                   #31 - Error when saving translation
                                   #32 - Migrate Admin Controller from legacy to symfony
